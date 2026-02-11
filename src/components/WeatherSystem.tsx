@@ -1,11 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Sun, CloudRain, Snowflake, Moon, Zap } from 'lucide-react';
+import { Sun, CloudRain, Snowflake, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-type WeatherState = 'night' | 'snow' | 'rain' | 'sun';
+const WEATHER_STATES = ['night', 'snow', 'rain', 'sun'] as const;
+type WeatherState = (typeof WEATHER_STATES)[number];
 
 const WeatherSystem = () => {
-    const [weather, setWeather] = useState<WeatherState>('night');
+    const [weather, setWeather] = useState<WeatherState>(() => {
+        if (typeof window === 'undefined') return 'night';
+        const saved = localStorage.getItem('theme-preference');
+        return WEATHER_STATES.includes(saved as WeatherState) ? (saved as WeatherState) : 'night';
+    });
+
+    useEffect(() => {
+        localStorage.setItem('theme-preference', weather);
+    }, [weather]);
+
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     // Canvas Animation Loop
@@ -15,8 +25,8 @@ const WeatherSystem = () => {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        let animationFrameId: number;
-        let particles: any[] = [];
+        let animationFrameId: number | undefined;
+        let particles: Array<{ x: number; y: number; speed: number; size: number; drift: number }> = [];
 
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
@@ -89,7 +99,7 @@ const WeatherSystem = () => {
 
         return () => {
             window.removeEventListener('resize', resizeCanvas);
-            cancelAnimationFrame(animationFrameId);
+            if (animationFrameId !== undefined) cancelAnimationFrame(animationFrameId);
         };
     }, [weather]);
 

@@ -13,35 +13,39 @@ const HyperText: React.FC<HyperTextProps> = ({ text, className = "" }) => {
 
   const startScramble = () => {
     let iteration = 0;
-    
-    clearInterval(intervalRef.current as number);
-    
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
     intervalRef.current = window.setInterval(() => {
-      setDisplayText(prev => 
+      setDisplayText(
         text
           .split("")
-          .map((letter, index) => {
-            if (index < iteration) {
-              return text[index];
-            }
+          .map((_, index) => {
+            if (index < iteration) return text[index];
             return letters[Math.floor(Math.random() * letters.length)];
           })
           .join("")
       );
-      
-      if (iteration >= text.length) {
-        clearInterval(intervalRef.current as number);
+
+      if (iteration >= text.length && intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
-      
       iteration += 1 / 3;
     }, 30);
   };
 
   useEffect(() => {
-     // Scramble on mount
-     startScramble();
-     return () => clearInterval(intervalRef.current as number);
-  }, []);
+    startScramble();
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [text]);
 
   return (
     <span 

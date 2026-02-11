@@ -1,15 +1,7 @@
 @import "tailwindcss";
 
-/* @theme block removed as it may conflict with Tailwind v3 configuration */
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @layer base {
-
   :root {
-    /* DEFAULT (NIGHT / DARK) */
     --bg-primary: #000000;
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.6);
@@ -19,8 +11,7 @@
     --accent-glow: rgba(0, 214, 255, 0.2);
   }
 
-  [data-theme='sun'] {
-    /* SUN (LIGHT) */
+  html[data-theme='sun'] {
     --bg-primary: #ffffff;
     --text-primary: #000000;
     --text-secondary: rgba(0, 0, 0, 0.6);
@@ -30,78 +21,60 @@
     --accent-glow: rgba(255, 165, 0, 0.2);
   }
 
-  [data-theme='snow'] {
-    /* SNOW (WINTER) */
+  html[data-theme='snow'] {
     --bg-primary: #f0f4f8;
-    /* AliceBlue-ish */
     --text-primary: #1e293b;
-    /* Slate-800 */
     --text-secondary: #475569;
-    /* Slate-600 */
     --glass-bg: rgba(255, 255, 255, 0.6);
     --glass-border: rgba(56, 189, 248, 0.2);
     --glass-shadow: rgba(56, 189, 248, 0.1);
     --accent-glow: rgba(56, 189, 248, 0.2);
   }
 
-  [data-theme='rain'] {
-    /* RAIN (STORM) */
+  html[data-theme='rain'] {
     --bg-primary: #0f172a;
-    /* Slate-900 */
     --text-primary: #e2e8f0;
-    /* Slate-200 */
     --text-secondary: #94a3b8;
-    /* Slate-400 */
     --glass-bg: rgba(15, 23, 42, 0.8);
     --glass-border: rgba(56, 189, 248, 0.3);
     --glass-shadow: rgba(56, 189, 248, 0.1);
     --accent-glow: rgba(56, 189, 248, 0.2);
   }
 
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    color-scheme: dark;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
     overflow-x: hidden;
     position: relative;
     transition: background-color 0.5s ease, color 0.5s ease;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  ::selection {
+    background-color: rgba(124, 44, 191, 0.4);
+    color: #fff;
+  }
 }
 
-:root {
-  font-family: var(--font-sans);
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: dark;
-  color: rgba(255, 255, 255, 0.9);
-  background-color: var(--color-background);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* The original body rule is now replaced by the one in @layer base */
-/* body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: #000000;
-  background-image: radial-gradient(circle at 50% -20%, #0a0a0a 0%, #000000 60%);
-  color: #ffffff;
-  overflow-x: hidden;
-  position: relative;
-} */
-
-/* Subtle Grain Overlay */
+/* Subtle grain overlay - behind UI */
 body::before {
   content: "";
   position: fixed;
@@ -110,23 +83,9 @@ body::before {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 50;
+  z-index: 1;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
-  opacity: 0.03;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-display);
-}
-
-::selection {
-  background-color: var(--color-cosmic-purple);
-  color: #fff;
+  opacity: 0.04;
 }
 
 @layer utilities {

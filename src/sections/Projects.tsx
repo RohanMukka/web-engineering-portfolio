@@ -71,10 +71,10 @@ const Projects = () => {
                 <div className="inline-block px-3 py-1 rounded-full border border-primary-blue/30 bg-primary-blue/10 text-electric-cyan text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
                   Selected Work
                 </div>
-                <h2 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight font-display">
+                <h2 className="text-5xl md:text-7xl font-bold text-primary-text mb-6 tracking-tight font-display">
                   Featured <br /> Projects.
                 </h2>
-                <p className="text-white/60 text-xl max-w-2xl">
+                <p className="text-secondary-text text-xl max-w-2xl">
                    A collection of experiments, products, and systems engineering.
                 </p>
             </motion.div>
@@ -91,26 +91,25 @@ const Projects = () => {
                            ${idx === 0 || idx === 3 ? 'md:col-span-2' : 'md:col-span-1'}
                         `}
                     >
-                         {/* Modified Version of ProjectPoster inline for Grid flexibility */}
-                         <div className="group relative h-[500px] w-full cursor-pointer overflow-hidden rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-md transition-all duration-500 hover:scale-[1.01] hover:bg-white/[0.07]">
-                            
-                            {/* Gradient Blob */}
+                         <a
+                            href={project.links.github ?? project.links.demo ?? '#'}
+                            target={project.links.github || project.links.demo ? "_blank" : undefined}
+                            rel={(project.links.github || project.links.demo) ? "noopener noreferrer" : undefined}
+                            className="group relative block h-[500px] w-full cursor-pointer overflow-hidden rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-md transition-all duration-500 hover:scale-[1.01] hover:bg-white/[0.07] focus:outline-none focus-visible:ring-2 focus-visible:ring-electric-cyan/50"
+                        >
                             <div 
                                 className="absolute top-[-20%] right-[-20%] w-[120%] h-[120%] rounded-full opacity-20 blur-[100px] transition-opacity duration-500 group-hover:opacity-40"
                                 style={{ background: `radial-gradient(circle, ${project.color}, transparent)` }}
                             />
-
                             <div className="relative h-full flex flex-col justify-between p-10">
                                 <div>
                                     <div className="flex justify-between items-start mb-6">
-                                        <div className="p-3 rounded-full bg-white/10 backdrop-blur-md">
+                                        <div className="p-3 rounded-full bg-white/10 backdrop-blur-md" aria-hidden>
                                             <Github size={20} />
                                         </div>
-                                        {project.links.github && (
-                                            <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors uppercase tracking-wider font-medium">
-                                                View Code <ArrowRight size={14} />
-                                            </a>
-                                        )}
+                                        <span className="flex items-center gap-2 text-sm text-white/40 group-hover:text-white transition-colors uppercase tracking-wider font-medium">
+                                            View Code <ArrowRight size={14} />
+                                        </span>
                                     </div>
                                     <h3 className="text-4xl font-bold text-white mb-4 font-display leading-[0.9]">
                                         {project.title}
@@ -119,7 +118,6 @@ const Projects = () => {
                                         {project.description}
                                     </p>
                                 </div>
-
                                 <div className="flex flex-wrap gap-2 mt-8">
                                     {project.tags.map(tag => (
                                         <span key={tag} className="text-xs font-bold px-3 py-1.5 rounded-full bg-black/20 text-white/60 border border-white/5">
@@ -128,7 +126,7 @@ const Projects = () => {
                                     ))}
                                 </div>
                             </div>
-                         </div>
+                         </a>
                     </motion.div>
                 ))}
             </div>

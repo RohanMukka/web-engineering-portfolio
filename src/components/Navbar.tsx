@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 100], [0, 1]);
-  const blur = useTransform(scrollY, [0, 100], [0, 12]);
+interface NavbarProps {
+  isScrolled?: boolean;
+}
+
+const Navbar = ({ isScrolled: isScrolledProp }: NavbarProps) => {
+  const [isScrolledLocal, setIsScrolledLocal] = useState(false);
+  const isScrolled = isScrolledProp ?? isScrolledLocal;
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    if (isScrolledProp !== undefined) return;
+    const handleScroll = () => setIsScrolledLocal(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isScrolledProp]);
 
   const navLinks = [
     { name: 'Overview', href: '#hero' },
