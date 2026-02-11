@@ -12,10 +12,9 @@ export const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
 
   const navLinks = [
     { label: 'Overview', href: '#overview' },
-    { label: 'Foundations', href: '#foundations' },
-    { label: 'Systems', href: '#systems' },
-    { label: 'Architecture', href: '#architecture' },
-    { label: 'Performance', href: '#performance' },
+    { label: 'About', href: '#about' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Projects', href: '#projects' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -51,7 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
         {/* Action Button */}
         <div className="flex items-center gap-4">
           <a 
-            href="https://github.com" 
+            href="https://github.com/RohanMukka" 
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white/90 text-sm font-medium hover:bg-[#0050FF] hover:border-[#0050FF] transition-all duration-300 group"

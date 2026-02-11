@@ -24,28 +24,49 @@ export const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
+          <div className="mb-4 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span className="text-sm font-medium text-white/70">Available for new opportunities</span>
+          </div>
+          
           <h1 className="text-5xl md:text-8xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
             Rohan Mukka <br />
-            <span className="text-white/40">Building interfaces with precision.</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40">
+              Full Stack Developer
+            </span>
           </h1>
           
           <p className="text-lg md:text-2xl text-white/60 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
-            Modern web engineering shaped by structure, <br className="hidden md:block" /> interaction, and performance.
+            Building decentralized systems, AI-powered applications, and intuitive web interfaces with precision and performance.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a 
-              href="#foundations" 
+              href="#projects" 
               className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
             >
-              Explore My Work
+              View Projects
             </a>
             <a 
               href="#contact" 
               className="px-8 py-4 rounded-full border border-white/10 bg-white/5 text-white font-medium hover:bg-white/10 transition-all duration-300"
             >
-              Get in Touch
+              Contact Me
             </a>
+          </div>
+
+          <div className="mt-16 flex items-center justify-center gap-8 text-white/30">
+             {/* Simple tech stack logos or icons could go here */}
+             <div className="flex flex-col items-center gap-1">
+                <span className="text-xs tracking-wider uppercase">Specializing in</span>
+                <div className="flex gap-4 text-sm font-medium text-white/50">
+                   <span>Web3</span>
+                   <span>•</span>
+                   <span>AI/ML</span>
+                   <span>•</span>
+                   <span>Full Stack</span>
+                </div>
+             </div>
           </div>
         </motion.div>
       </div>
@@ -57,7 +78,7 @@ export const Hero: React.FC = () => {
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
       >
         <div className="flex flex-col items-center gap-2">
-          <span className="text-white/30 text-[10px] uppercase tracking-widest font-bold">Scroll to navigate</span>
+          <span className="text-white/30 text-[10px] uppercase tracking-widest font-bold">Scroll to explore</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

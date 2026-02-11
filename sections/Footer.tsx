@@ -25,7 +25,9 @@ export const Footer: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20">
             <a 
-              href="https://github.com" 
+              href="https://github.com/RohanMukka" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="group w-full sm:w-auto px-10 py-5 rounded-full bg-white text-black font-bold flex items-center justify-center gap-2 hover:bg-white/90 transition-all duration-300"
             >
               <Github size={20} />

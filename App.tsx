@@ -1,11 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './sections/Hero';
-import { Foundations } from './sections/Foundations';
-import { Systems } from './sections/Systems';
-import { Architecture } from './sections/Architecture';
-import { Performance } from './sections/Performance';
+import { Projects } from './sections/Projects';
+import { Skills } from './sections/Skills';
+import { About } from './sections/About';
 import { Footer } from './sections/Footer';
 
 const App: React.FC = () => {
@@ -25,10 +23,9 @@ const App: React.FC = () => {
       
       <main className="relative">
         <Hero />
-        <Foundations />
-        <Systems />
-        <Architecture />
-        <Performance />
+        <About />
+        <Skills />
+        <Projects />
         <Footer />
       </main>
     </div>
