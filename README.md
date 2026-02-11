@@ -1,6 +1,6 @@
 # Web Engineering Portfolio
 
-A premium, minimal, Apple-inspired portfolio website built to showcase my learning and applied experience in modern web technologies.
+A premium, minimal portfolio website built to showcase my learning and applied experience in modern web technologies.
 
 This project was designed as an engineering-focused frontend showcase, demonstrating structure, interactivity, responsiveness, performance optimization, and clean deployment practices.
 
