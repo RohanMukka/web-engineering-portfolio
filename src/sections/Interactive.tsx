@@ -1,98 +1,51 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import SectionContainer from '../components/SectionContainer';
-import Button from '../components/Button';
-import { motion, AnimatePresence } from 'framer-motion';
+import GravityElement from '../components/GravityElement';
+import { motion } from 'framer-motion';
+
+const tags = [
+    "React", "Three.js", "Physics", "Creative", "Interactive", 
+    "Animation", "WebGL", "Next.js", "TypeScript", "UI/UX",
+    "Tailwind", "Framer", "Design", "Node.js", "Systems"
+];
 
 const Interactive = () => {
-  const [count, setCount] = useState(0);
-  const [activeTab, setActiveTab] = useState('demo');
+  const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <SectionContainer id="interactive">
-      <div className="flex flex-col lg:flex-row gap-16">
-        <div className="lg:w-1/2">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white/90">
-            Interfaces that respond.
-          </h2>
-          <p className="text-lg text-white/60 mb-6 leading-relaxed">
-             Beyond static content, I engineer interactive systems using React's event-driven architecture.
-             From simple DOM manipulation to complex state management, I ensure every interaction is smooth and predictable.
-          </p>
+    <section id="interactive" className="relative min-h-[80vh] flex flex-col items-center justify-center py-20 overflow-hidden">
+        <SectionContainer className="text-center mb-10 z-10 pointer-events-none">
+             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 font-display">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-cyan to-cosmic-purple">
+                    Play
+                </span> with the Tech.
+             </h2>
+             <p className="text-white/60 text-xl max-w-2xl mx-auto">
+                Web development isn't just static text. It's fluid, interactive, and fun. 
+                <br /><span className="text-electric-cyan font-bold">Throw these tags around.</span>
+             </p>
+        </SectionContainer>
+        
+        <div 
+            ref={containerRef} 
+            className="relative w-full max-w-5xl h-[60vh] bg-glass-bg rounded-3xl border border-glass-border backdrop-blur-sm overflow-hidden flex flex-wrap content-center justify-center gap-4 p-10 cursor-default shadow-lg shadow-glass-shadow"
+        >
+             {/* Physics Area */}
+             {tags.map((tag, i) => (
+                 <GravityElement 
+                    key={tag} 
+                    constraintsRef={containerRef}
+                    className="px-6 py-3 rounded-full bg-background-secondary/80 border border-glass-border backdrop-blur-md text-primary-text font-mono text-sm shadow-lg hover:bg-glass-bg hover:border-glass-border hover:shadow-glass-shadow transition-colors"
+                 >
+                    {tag}
+                 </GravityElement>
+             ))}
 
-          <div className="space-y-6 text-white/60">
-             <p>Core concepts applied:</p>
-             <div className="flex flex-wrap gap-3">
-                {['useState', 'useEffect', 'Event Handling', 'Async/Await', 'DOM Manipulation'].map(tag => (
-                    <span key={tag} className="px-3 py-1 rounded-full text-sm border border-white/10 bg-white/5">
-                        {tag}
-                    </span>
-                ))}
+             <div className="absolute bottom-4 right-6 text-white/20 text-sm font-mono pointer-events-none">
+                Powered by Framer Motion
              </div>
-          </div>
         </div>
-
-        <div className="lg:w-1/2">
-             <div className="p-1 rounded-2xl bg-white/5 border border-white/10 mb-8 inline-flex">
-                 <button 
-                    onClick={() => setActiveTab('demo')}
-                    className={`px-4 py-2 text-sm rounded-xl transition-all ${activeTab === 'demo' ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white'}`}
-                >
-                    Live Demo
-                 </button>
-                 <button 
-                    onClick={() => setActiveTab('code')}
-                    className={`px-4 py-2 text-sm rounded-xl transition-all ${activeTab === 'code' ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white'}`}
-                >
-                    Code Logic
-                 </button>
-             </div>
-
-             <AnimatePresence mode="wait">
-                 {activeTab === 'demo' ? (
-                     <motion.div 
-                        key="demo"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        className="p-8 rounded-3xl border border-white/10 bg-background-secondary flex flex-col items-center justify-center min-h-[300px]"
-                    >
-                        <div className="text-6xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-primary-blue to-electric-cyan font-mono">
-                            {count}
-                        </div>
-                        <div className="flex gap-4">
-                            <Button onClick={() => setCount(c => c - 1)} variant="outline" className="w-12 h-12 !px-0 rounded-full">-</Button>
-                            <Button onClick={() => setCount(c => c + 1)} variant="outline" className="w-12 h-12 !px-0 rounded-full">+</Button>
-                        </div>
-                        <p className="mt-8 text-sm text-white/40">Interactive State Component</p>
-                    </motion.div>
-                 ) : (
-                     <motion.div 
-                        key="code"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        className="p-6 rounded-3xl border border-white/10 bg-[#0d0d0d] font-mono text-sm overflow-x-auto min-h-[300px]"
-                    >
-                        <pre className="text-white/70">
-{`const [count, setCount] = useState(0);
-
-// Increment Handler
-const handleIncrement = () => {
-  setCount(prev => prev + 1);
-};
-
-return (
-  <button onClick={handleIncrement}>
-    Count: {count}
-  </button>
-);`}
-                        </pre>
-                    </motion.div>
-                 )}
-             </AnimatePresence>
-        </div>
-      </div>
-    </SectionContainer>
+    </section>
   );
 };
 

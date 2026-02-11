@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
               <span>View GitHub</span>
             </a>
             <a 
-              href="https://linkedin.com" 
+              href="https://www.linkedin.com/in/rohanmukka" 
               className="group w-full sm:w-auto px-10 py-5 rounded-full border border-white/10 bg-white/5 text-white font-medium flex items-center justify-center gap-2 hover:bg-white/10 transition-all duration-300"
             >
               <Linkedin size={20} />
