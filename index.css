@@ -1,6 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-background: #050505;
+  --color-background-secondary: #0A0A0C;
+  --color-primary-blue: #0050FF;
+  --color-electric-cyan: #00D6FF;
+  --font-sans: Inter, "SF Pro Display", system-ui, sans-serif;
+}
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -21,9 +27,18 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #050505;
+  background-color: var(--color-background);
   color: #ffffff;
   overflow-x: hidden;
+}
+
+@layer utilities {
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #ffffff, rgba(255, 255, 255, 0.5));
+  }
 }
 
 @layer utilities {
