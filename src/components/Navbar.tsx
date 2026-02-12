@@ -7,6 +7,8 @@ interface NavbarProps {
 
 const Navbar = ({ isScrolled = false }: NavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [hovered, setHovered] = useState<string | null>(null);
+
   const links = [
     { name: 'About', href: '#architecture' },
     { name: 'Work', href: '#projects' },
@@ -30,16 +32,54 @@ const Navbar = ({ isScrolled = false }: NavbarProps) => {
         <a href="#" className="text-lg font-display font-semibold text-primary-text hover:opacity-80 transition-opacity">
           Rohan Mukka
         </a>
-        <div className="hidden md:flex items-center gap-8">
+        
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-2">
           {links.map((link) => (
-            <a key={link.name} href={link.href} className="text-sm text-primary-secondary hover:text-primary-text transition-colors">
+            <a
+              key={link.name}
+              href={link.href}
+              className="relative px-4 py-2 text-sm font-medium text-primary-secondary hover:text-primary-text transition-colors"
+              onMouseEnter={() => setHovered(link.name)}
+              onMouseLeave={() => setHovered(null)}
+            >
+              {hovered === link.name && (
+                <motion.span
+                  layoutId="nav-item-hover"
+                  className="absolute inset-0 bg-surface-subtle border border-glass-border rounded-full -z-10"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
+                />
+              )}
               {link.name}
             </a>
           ))}
-          <a href="https://github.com/rohanmukka" target="_blank" rel="noopener noreferrer" className="text-sm text-primary-secondary hover:text-primary-text transition-colors">
+          
+          <a
+            href="https://github.com/rohanmukka"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative px-4 py-2 text-sm font-medium text-primary-secondary hover:text-primary-text transition-colors"
+            onMouseEnter={() => setHovered('github')}
+            onMouseLeave={() => setHovered(null)}
+          >
+            {hovered === 'github' && (
+              <motion.span
+                layoutId="nav-item-hover"
+                className="absolute inset-0 bg-surface-subtle border border-glass-border rounded-full -z-10"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.2 }}
+              />
+            )}
             GitHub
           </a>
         </div>
+
+        {/* Mobile Menu Button */}
         <button
           type="button"
           className="md:hidden p-2 text-primary-text"
@@ -51,6 +91,8 @@ const Navbar = ({ isScrolled = false }: NavbarProps) => {
           </svg>
         </button>
       </div>
+
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -60,11 +102,11 @@ const Navbar = ({ isScrolled = false }: NavbarProps) => {
             exit={{ opacity: 0, y: -8 }}
           >
             {links.map((link) => (
-              <a key={link.name} href={link.href} className="text-primary-text py-2" onClick={() => setMobileOpen(false)}>
+              <a key={link.name} href={link.href} className="text-primary-text py-2 px-2 hover:bg-surface-subtle rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>
                 {link.name}
               </a>
             ))}
-            <a href="https://github.com/rohanmukka" target="_blank" rel="noopener noreferrer" className="text-primary-text py-2" onClick={() => setMobileOpen(false)}>
+            <a href="https://github.com/rohanmukka" target="_blank" rel="noopener noreferrer" className="text-primary-text py-2 px-2 hover:bg-surface-subtle rounded-lg transition-colors" onClick={() => setMobileOpen(false)}>
               GitHub
             </a>
           </motion.div>

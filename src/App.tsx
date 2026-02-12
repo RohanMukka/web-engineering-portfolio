@@ -9,6 +9,7 @@ import Education from './sections/Education';
 import FinalCTA from './sections/FinalCTA';
 import Loader from './components/Loader';
 import ResumeButton from './components/ResumeButton';
+import Background from './components/Background';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -34,7 +35,8 @@ function App() {
   }
 
   return (
-    <div className="bg-background text-primary-text">
+    <div className="bg-background text-primary-text relative min-h-screen">
+      <Background />
       <Navbar isScrolled={isScrolled} />
       
       {/* Fixed Resume Button */}
