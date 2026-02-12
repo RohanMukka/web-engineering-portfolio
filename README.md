@@ -1,123 +1,69 @@
-# Web Engineering Portfolio
+# Rohan Mukka | Web Engineering Portfolio
 
-A premium, minimal portfolio website built to showcase my learning and applied experience in modern web technologies.
+A premium, state-of-the-art portfolio website built to showcase high-performance web systems and creative engineering. Built with a focus on architectural integrity, fluid interactivity, and premium aesthetics.
 
-This project was designed as an engineering-focused frontend showcase, demonstrating structure, interactivity, responsiveness, performance optimization, and clean deployment practices.
+## 🚀 Key Highlights
 
-## Overview
+This isn't just a portfolio; it's a live demonstration of modern web engineering capabilities:
 
-This portfolio highlights what I have learned in web technologies through:
+- **Adaptive Theming:** Seamless transition between **Royal Blue (Light)** and **Deep Indigo (Dark)** modes with synchronized asset coloring.
+- **Abstract Ambient Background:** A dynamic, multi-layered background system featuring drifting gradient orbs and topographic noise that reacts to scroll and mouse movements.
+- **Draggable "System Log" HUD:** An interactive floating monitor that tracks live section navigation, mouse vectors, and system events.
+- **Tech Infinity Ribbon:** An infinite-scrolling marquee showcasing a mastery of modern technologies (React, TS, Solidity, etc.).
+- **Magnetic Interaction UI:** Custom CTA components that utilize magnetic physics to "pull" the cursor and tilt toward user interaction.
+- **Glassmorphic Architecture:** A consistent design language using high-fidelity blur effects, translucent borders, and depth-aware shadows.
 
-- Semantic HTML and accessibility principles
-- CSS layout systems using Flexbox and Grid
-- Responsive design across devices
-- JavaScript fundamentals and DOM interaction
-- React component-based architecture
-- TypeScript for type-safe development
-- State management using React hooks
-- Utility-first styling with Tailwind CSS
-- Scroll-based animations with Framer Motion
-- Performance optimization and production deployment
+## 🛠️ Tech Stack
 
-The website itself serves as a live demonstration of these skills.
+- **Core Framework:** React 19 (Vite)
+- **Language:** TypeScript (Strict Mode)
+- **Styling:** Tailwind CSS 4.0
+- **Animation:** Framer Motion 12.0
+- **Icons:** Lucide React
+- **Deployment:** Vercel (Edge Optimized)
 
-## Tech Stack
+## 📁 Featured Work
 
-- **Framework:** React (Vite)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **Animation:** Framer Motion
-- **Deployment:** Vercel
+Mastery across Web, Machine Learning, and Systems:
 
-## Features Implemented
+- **Web Engineering (Flagship)** – Current portfolio featuring advanced interaction systems.
+- **BEneFIT** – Decentralized fitness accountability using Ethereum smart contracts.
+- **Spend Smart** – Real-time personal finance visualization built with Firebase.
+- **Diagnostic AI** – Hybrid ML system for high-precision diagnostic insights using Python.
+- **FeeAutomation** – Enterprise automation tool for auditing and processing transactions.
+- **Emotion Recog** – Deep learning classification of EEG signals for human emotion recognition.
 
-- Apple-style minimal navigation with scroll-aware behavior
-- Responsive layout optimized for desktop and mobile
-- Scroll-triggered animations with smooth transitions
-- Component-based architecture with modular file structure
-- Interactive UI elements demonstrating state management
-- Featured project cards linking to GitHub repositories
-- Performance-conscious structure and optimized assets
+*Detailed links to all 10+ major repositories are available in the "Work" section of the live site.*
 
-## What This Project Demonstrates
-
-### Web Foundations
-- Semantic HTML structure
-- Accessibility-aware layout decisions
-- Responsive design using Flexbox and Grid
-
-### JavaScript & Interactivity
-- Event-driven UI behavior
-- State management with `useState` and `useEffect`
-- Conditional rendering
-- Async programming patterns
-
-### Modern Frontend Architecture
-- Reusable component systems
-- Type-safe development with TypeScript
-- Clean project structure and separation of concerns
-- Utility-first styling using Tailwind
-
-### Performance & Deployment
-- Optimized rendering strategy
-- Clean Git version control
-- Production deployment workflow
-- Lighthouse performance awareness
-
-## Featured Projects
-
-This portfolio highlights applied experience through the following repositories:
-
-- **JAI** – TypeScript-based modular web architecture
-- **SpendSmart** – Firebase-integrated dynamic web application
-- **FitPrep** – JavaScript-driven interactive UI
-- **BEneFIT** – Web3-enabled decentralized application
-
-Each project demonstrates practical application of frontend and web engineering concepts.
-
-## Project Structure
+## 🏗️ Project Architecture
 
 ```
+/public             # Static assets (Resume, local icons)
 /src
-  /components
-  /sections
-  /hooks
-  /assets
+  /components       # Reusable UI (HUD, Ribbon, Background, etc.)
+  /sections         # Main page sections (Hero, Projects, Education)
+  /hooks            # Custom React hooks
+  App.tsx           # Layout Orchestration
+  index.css         # Design System & Global Variables
 ```
 
-The architecture emphasizes modularity, readability, and maintainability.
+## 📊 Performance Metrics
 
-## Deployment
+Optimized for near-perfect Lighthouse scores through systematic performance audits.
 
-**Live Site:**
-[https://web-engineering-portfolio.vercel.app/](https://web-engineering-portfolio.vercel.app/)
+- **FCP / LCP:** Optimized via lazy loading and lightweight asset management.
+- **Accessibility:** Semantic HTML5 and ARIA-conscious component design.
+- **SEO:** Optimized Meta Tags and structured data for search visibility.
 
-Deployed using Vercel with optimized production build.
-
-## Lighthouse Performance
-
-*(Insert screenshot after running Lighthouse)*
-
-**Target:**
-- Performance ≥ 90
-- Accessibility ≥ 90
-- Best Practices ≥ 90
-- SEO ≥ 90
-
-## Why This Portfolio Matters
-
-This project is intentionally structured to demonstrate growth from foundational web technologies to modern frontend engineering practices.
-
-It reflects:
-- Structured thinking
-- Clean UI judgment
-- Performance awareness
-- Production-ready development
-
-## Author
+## 🎓 About the Author
 
 **Rohan Mukka**
-MS Computer Science
-University of Oklahoma
+MS Computer Science | University of Oklahoma
+Specializing in Full-Stack Scalability, Intelligent Automation, and Architectural Integrity.
 
-GitHub: [https://github.com/RohanMukka](https://github.com/RohanMukka)
+- **GitHub:** [https://github.com/RohanMukka](https://github.com/RohanMukka)
+- **LinkedIn:** [https://linkedin.com/in/rohanmukka](https://linkedin.com/in/rohanmukka)
+
+---
+
+*Built with passion and calculated engineering.*
