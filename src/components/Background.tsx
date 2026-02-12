@@ -40,7 +40,11 @@ const Background = () => {
   // Transforms
   const yParallax = useTransform(scrollYDelayed, [0, 2000], [0, -300]);
   
-  // Create transformed motion values with explicit range mappings to avoid arithmetic issues
+  // Grid Transforms
+  const gridY = useTransform(scrollYDelayed, [0, 5000], [-300, 700]); // Moves grid "forward" (down) on scroll
+  const gridX = useTransform(springMouseX, [-50, 50], [20, -20]); // Parallax opposite to mouse
+  
+  // Orb Parallax
   const xInverse = useTransform(springMouseX, [-25, 25], [12.5, -12.5]);
   const yInverse = useTransform(springMouseY, [-25, 25], [12.5, -12.5]);
   
@@ -106,12 +110,28 @@ const Background = () => {
            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
       </div>
 
-      {/* Very faint structural lines */}
-      <div className="absolute inset-0 opacity-[0.04]" 
-           style={{ 
-             backgroundImage: 'radial-gradient(var(--text-tertiary) 0.5px, transparent 0.5px)',
-             backgroundSize: '80px 80px'
-           }}>
+      {/* 3D Perspective Grid */}
+      <div 
+        className="absolute inset-[-50%] opacity-[0.15] pointer-events-none"
+        style={{
+          perspective: '1000px',
+          transformStyle: 'preserve-3d',
+        }}
+      >
+        <motion.div 
+          className="w-full h-full origin-center"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, var(--text-secondary) 1px, transparent 1px),
+              linear-gradient(to bottom, var(--text-secondary) 1px, transparent 1px)
+            `,
+            backgroundSize: '100px 100px',
+            rotateX: 60,
+            y: gridY,
+            x: gridX,
+            opacity: 0.8,
+          }}
+        />
       </div>
     </div>
   );
