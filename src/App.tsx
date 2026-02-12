@@ -10,12 +10,14 @@ import FinalCTA from './sections/FinalCTA';
 import Loader from './components/Loader';
 import ResumeButton from './components/ResumeButton';
 import BackToTop from './components/BackToTop';
-import CustomCursor from './components/CustomCursor';
+import CustomCursor, { CursorType } from './components/CustomCursor';
+import CursorCustomizer from './components/CursorCustomizer';
 import Background from './components/Background';
 
-function App() {
+const App = () => {
   const [loading, setLoading] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [cursorType, setCursorType] = useState<CursorType>('ring');
 
   useEffect(() => {
     // Simulate initial loading
@@ -24,23 +26,33 @@ function App() {
     }, 2500);
 
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    
+    const savedCursor = localStorage.getItem('cursorType') as CursorType;
+    if (savedCursor) setCursorType(savedCursor);
+
     return () => {
       clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
+  const handleCursorChange = (type: CursorType) => {
+    setCursorType(type);
+    localStorage.setItem('cursorType', type);
+  };
+
   if (loading) {
     return <Loader />;
   }
 
   return (
-    <div className="bg-background text-primary-text relative min-h-screen cursor-none">
-      <CustomCursor />
+    <div className={`bg-background text-primary-text relative min-h-screen ${cursorType !== 'default' ? 'cursor-none' : ''}`}>
+      <CustomCursor type={cursorType} />
       <Background />
-      <Navbar isScrolled={isScrolled} />
+      <Navbar 
+        isScrolled={isScrolled} 
+      />
+      
+      <CursorCustomizer currentType={cursorType} onChange={handleCursorChange} />
       
       {/* Fixed UI Elements */}
       <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[60] flex flex-col gap-4 items-center">

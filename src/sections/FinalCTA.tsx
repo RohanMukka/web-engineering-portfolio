@@ -41,21 +41,21 @@ const FinalCTA = () => {
             </p>
 
             <div className="space-y-6">
-              <a href="mailto:rohanmukka@gmail.com" className="flex items-center gap-4 group p-4 rounded-2xl bg-surface-subtle/40 border border-glass-border hover:border-accent/30 transition-all w-fit pr-10">
-                <div className="p-3 rounded-xl bg-accent/10 text-accent group-hover:scale-110 transition-transform">
-                  <Mail size={24} />
+              <a href="mailto:rohanmukka03@gmail.com" className="flex items-center gap-4 group p-5 rounded-[2rem] bg-bg-elevated/50 border-2 border-glass-border hover:border-accent/40 hover:bg-bg-elevated transition-all duration-300 w-fit pr-12 shadow-sm hover:shadow-2xl hover:-translate-y-1">
+                <div className="p-4 rounded-2xl bg-accent text-white group-hover:bg-accent/80 transition-all duration-500 shadow-inner">
+                  <Mail size={28} />
                 </div>
                 <div>
-                  <div className="text-xs text-primary-secondary font-bold uppercase tracking-wider mb-1">Email Me</div>
-                  <div className="text-lg font-medium text-primary-text">rohanmukka@gmail.com</div>
+                  <div className="text-xs text-primary-text font-black uppercase tracking-widest mb-1 opacity-60">Email Me</div>
+                  <div className="text-xl font-bold text-primary-text group-hover:text-accent transition-colors">rohanmukka03@gmail.com</div>
                 </div>
               </a>
 
               <div className="flex gap-4">
-                <a href="https://linkedin.com/in/rohanmukka" target="_blank" rel="noopener noreferrer" className="p-4 rounded-2xl bg-surface-subtle/40 border border-glass-border hover:border-accent/30 hover:text-accent transition-all">
+                <a href="https://linkedin.com/in/rohanmukka" target="_blank" rel="noopener noreferrer" className="p-4 rounded-2xl bg-surface-subtle border border-glass-border hover:border-accent/50 hover:bg-accent/5 hover:text-accent transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1">
                   <Linkedin size={24} />
                 </a>
-                <a href="https://github.com/rohanmukka" target="_blank" rel="noopener noreferrer" className="p-4 rounded-2xl bg-surface-subtle/40 border border-glass-border hover:border-accent/30 hover:text-accent transition-all">
+                <a href="https://github.com/rohanmukka" target="_blank" rel="noopener noreferrer" className="p-4 rounded-2xl bg-surface-subtle border border-glass-border hover:border-accent/50 hover:bg-accent/5 hover:text-accent transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1">
                   <Github size={24} />
                 </a>
               </div>
@@ -98,21 +98,21 @@ const FinalCTA = () => {
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-sm font-bold text-primary-secondary uppercase tracking-wider px-1">Full Name</label>
-                      <input required type="text" placeholder="John Doe" className="w-full bg-surface-subtle border border-glass-border rounded-xl px-4 py-3 text-primary-text outline-none focus:border-accent/50 transition-colors" />
+                      <label className="text-sm font-bold text-primary-text uppercase tracking-wider px-1">Full Name</label>
+                      <input required type="text" placeholder="John Doe" className="w-full bg-surface-subtle border-2 border-glass-border rounded-xl px-4 py-3 text-primary-text outline-none focus:border-accent/50 focus:bg-bg-elevated transition-all placeholder:text-text-tertiary" />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-bold text-primary-secondary uppercase tracking-wider px-1">Email Address</label>
-                      <input required type="email" placeholder="john@example.com" className="w-full bg-surface-subtle border border-glass-border rounded-xl px-4 py-3 text-primary-text outline-none focus:border-accent/50 transition-colors" />
+                      <label className="text-sm font-bold text-primary-text uppercase tracking-wider px-1">Email Address</label>
+                      <input required type="email" placeholder="john@example.com" className="w-full bg-surface-subtle border-2 border-glass-border rounded-xl px-4 py-3 text-primary-text outline-none focus:border-accent/50 focus:bg-bg-elevated transition-all placeholder:text-text-tertiary" />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-primary-secondary uppercase tracking-wider px-1">Subject</label>
-                    <input required type="text" placeholder="Project Inquiry" className="w-full bg-surface-subtle border border-glass-border rounded-xl px-4 py-3 text-primary-text outline-none focus:border-accent/50 transition-colors" />
+                    <label className="text-sm font-bold text-primary-text uppercase tracking-wider px-1">Subject</label>
+                    <input required type="text" placeholder="Project Inquiry" className="w-full bg-surface-subtle border-2 border-glass-border rounded-xl px-4 py-3 text-primary-text outline-none focus:border-accent/50 focus:bg-bg-elevated transition-all placeholder:text-text-tertiary" />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-primary-secondary uppercase tracking-wider px-1">Message</label>
-                    <textarea required rows={4} placeholder="Hello, I'd like to talk about..." className="w-full bg-surface-subtle border border-glass-border rounded-xl px-4 py-3 text-primary-text outline-none focus:border-accent/50 transition-colors resize-none"></textarea>
+                    <label className="text-sm font-bold text-primary-text uppercase tracking-wider px-1">Message</label>
+                    <textarea required rows={4} placeholder="Hello, I'd like to talk about..." className="w-full bg-surface-subtle border-2 border-glass-border rounded-xl px-4 py-3 text-primary-text outline-none focus:border-accent/50 focus:bg-bg-elevated transition-colors resize-none placeholder:text-text-tertiary"></textarea>
                   </div>
                   
                   <button 

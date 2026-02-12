@@ -1,37 +1,48 @@
 @import "tailwindcss";
 
+@theme {
+  --color-background: var(--bg-primary);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-primary-text: var(--text-primary);
+  --color-primary-secondary: var(--text-secondary);
+  --color-primary-tertiary: var(--text-tertiary);
+  --color-accent: var(--accent);
+  --color-glass-border: var(--glass-border);
+  --color-surface-subtle: var(--surface-subtle);
+}
+
 @layer base {
   :root {
     /* Warm cream theme (Light) */
     --bg-primary: #f8f6f2;
-    --bg-elevated: #fffefb;
-    --text-primary: #021e62;
-    --text-secondary: rgba(2, 30, 98, 0.85);
-    /* Increased from 0.7 */
-    --text-tertiary: rgba(2, 30, 98, 0.65);
-    /* Increased from 0.5 */
-    --glass-bg: rgba(255, 255, 255, 0.4);
-    --glass-border: rgba(2, 30, 98, 0.12);
-    /* Increased from 0.08 */
-    --glass-shadow: rgba(2, 30, 98, 0.05);
-    --surface-subtle: rgba(2, 30, 98, 0.06);
-    /* Slightly darker for better contrast */
+    --bg-elevated: #ffffff;
+    --text-primary: #020b1f;
+    /* Darker for better contrast */
+    --text-secondary: #2d334a;
+    --text-tertiary: #5c6a8a;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    /* More opaque */
+    --glass-border: rgba(2, 11, 31, 0.12);
+    --glass-shadow: rgba(2, 11, 31, 0.05);
+    --surface-subtle: rgba(2, 11, 31, 0.04);
     --accent: #c45c26;
-    --accent-dim: rgba(196, 92, 38, 0.12);
+    --accent-rgb: 196, 92, 38;
+    --accent-dim: rgba(196, 92, 38, 0.15);
   }
 
   [data-theme='dark'] {
     --bg-primary: #0a0a0d;
     --bg-elevated: #16161a;
-    --text-primary: #e4e4e7;
-    --text-secondary: rgba(228, 228, 231, 0.7);
-    --text-tertiary: rgba(228, 228, 231, 0.5);
-    --glass-bg: rgba(22, 22, 26, 0.6);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-tertiary: #64748b;
+    --glass-bg: rgba(15, 23, 42, 0.8);
     --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-shadow: rgba(0, 0, 0, 0.4);
+    --glass-shadow: rgba(0, 0, 0, 0.5);
     --surface-subtle: rgba(255, 255, 255, 0.05);
     --accent: #f97316;
-    --accent-dim: rgba(249, 115, 22, 0.15);
+    --accent-rgb: 249, 115, 22;
+    --accent-dim: rgba(249, 115, 22, 0.2);
   }
 
   .glass-card {

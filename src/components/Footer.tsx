@@ -20,10 +20,10 @@ const Footer = () => {
               Designing and developing high-performance applications with a focus on user experience and architectural cleaniness.
             </p>
             <div className="flex gap-4">
-              <a href="https://github.com/rohanmukka" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-xl bg-surface-subtle border border-glass-border hover:border-accent/40 hover:text-accent transition-all">
+              <a href="https://github.com/rohanmukka" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-xl bg-bg-elevated/50 border border-glass-border hover:border-accent/50 hover:bg-accent/5 hover:text-accent transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1">
                 <Github size={20} />
               </a>
-              <a href="https://linkedin.com/in/rohanmukka" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-xl bg-surface-subtle border border-glass-border hover:border-accent/40 hover:text-accent transition-all">
+              <a href="https://linkedin.com/in/rohanmukka" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-xl bg-bg-elevated/50 border border-glass-border hover:border-accent/50 hover:bg-accent/5 hover:text-accent transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1">
                 <Linkedin size={20} />
               </a>
             </div>
@@ -72,7 +72,7 @@ const Footer = () => {
               <input 
                 type="email" 
                 placeholder="email@example.com" 
-                className="flex-grow bg-surface-subtle/50 border border-glass-border rounded-xl px-4 py-2 text-sm text-primary-text outline-none focus:border-accent/50 transition-all"
+                className="flex-grow bg-bg-elevated/50 border-2 border-glass-border rounded-xl px-4 py-2 text-sm text-primary-text outline-none focus:border-accent/50 transition-all placeholder:text-text-tertiary"
               />
               <button className="p-2 rounded-xl bg-accent text-white hover:bg-accent/90 transition-all">
                 <Send size={18} />

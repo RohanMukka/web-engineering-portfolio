@@ -105,16 +105,16 @@ const Skills = () => {
             </p>
 
             <div className="flex justify-center mb-8">
-                <div className="flex bg-surface-subtle p-1 rounded-xl border border-glass-border">
+                <div className="flex bg-surface-subtle/50 p-1.5 rounded-2xl border border-glass-border">
                     <button 
                         onClick={() => setIsGridView(false)}
-                        className={`px-6 py-2 rounded-lg text-sm font-semibold transition-all ${!isGridView ? 'bg-primary-text text-white shadow-lg' : 'text-primary-secondary hover:text-primary-text'}`}
+                        className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${!isGridView ? 'bg-primary-text text-background shadow-lg scale-105' : 'text-primary-secondary hover:text-primary-text hover:bg-bg-elevated/50'}`}
                     >
                         Carousel
                     </button>
                     <button 
                         onClick={() => setIsGridView(true)}
-                        className={`px-6 py-2 rounded-lg text-sm font-semibold transition-all ${isGridView ? 'bg-primary-text text-white shadow-lg' : 'text-primary-secondary hover:text-primary-text'}`}
+                        className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${isGridView ? 'bg-primary-text text-background shadow-lg scale-105' : 'text-primary-secondary hover:text-primary-text hover:bg-bg-elevated/50'}`}
                     >
                         Grid
                     </button>
@@ -248,7 +248,7 @@ const Skills = () => {
                     <button
                         key={idx}
                         onClick={() => setCurrentIndex(idx)}
-                        className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-primary-text' : 'w-2 bg-primary-secondary/40 hover:bg-primary-secondary/70'}`}
+                        className={`h-2.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-10 bg-primary-text shadow-sm' : 'w-2.5 bg-primary-text/20 hover:bg-primary-text/40'}`}
                         aria-label={`Go to slide ${idx + 1}`}
                     />
                 ))}

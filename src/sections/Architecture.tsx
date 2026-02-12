@@ -18,18 +18,18 @@ const Architecture = () => {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-blue/5 rounded-full blur-[100px] -z-10"></div>
 
         <h2 className="text-4xl md:text-6xl font-display font-bold text-primary-text mb-12 tracking-tight">
-            The Architect’s <span className="text-accent italic">Journey</span>
+             <span className="text-accent italic">Journey</span>
         </h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           <div className="lg:col-span-8 space-y-8">
-            <div className="space-y-6 text-xl text-primary-secondary leading-[1.8]">
+            <div className="space-y-6 text-xl text-primary-text leading-[1.8] font-medium opacity-90">
               <p>
-                  Since <span className="text-accent font-bold">2020</span>, I've been obsessed with the art of digital construction. What started as simple curiosity has grown into a deep-seated passion for architectural integrity and performance.
+                  Since <span className="text-accent font-black">2020</span>, I've been obsessed with the art of digital construction. What started as simple curiosity has grown into a deep-seated passion for architectural integrity and performance.
               </p>
 
               <p>
-                  I don't just write code; I design systems. Currently specializing in <span className="text-primary-text font-semibold underline decoration-accent/30 decoration-4">Full-Stack Scalability</span> and <span className="text-primary-text font-semibold underline decoration-primary-blue/30 decoration-4">Intelligent Automation</span> at the University of Oklahoma, I believe that every pixel and every line of logic should serve a purpose.
+                  I don't just write code; I design systems. Currently specializing in <span className="text-primary-text font-black underline decoration-accent/40 decoration-4 underline-offset-4">Full-Stack Scalability</span> and <span className="text-primary-text font-black underline decoration-accent/40 decoration-4 underline-offset-4">Intelligent Automation</span> at the University of Oklahoma, I believe that every pixel and every line of logic should serve a purpose.
               </p>
             </div>
             
@@ -38,7 +38,7 @@ const Architecture = () => {
                 href="https://devpost.com/rohan-mukka-1" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary-text text-white hover:bg-primary-text/90 transition-all duration-300 group font-bold shadow-2xl shadow-primary-text/10"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary-text text-background hover:bg-primary-text/90 transition-all duration-300 group font-bold shadow-2xl shadow-primary-text/20 border border-primary-text/10"
               >
                 <Rocket size={22} className="group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
                 <span>View Hackathon Portfolio</span>
@@ -59,13 +59,13 @@ const Architecture = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 + (i * 0.1), duration: 0.5 }}
-                    className={`p-8 rounded-[2rem] bg-surface-subtle border ${stat.color} flex items-center justify-between group hover:bg-surface-subtle/80 transition-all transform hover:-translate-y-1`}
+                    className={`p-8 rounded-[2.5rem] bg-bg-elevated/80 border-2 ${stat.color} flex items-center justify-between group hover:bg-bg-elevated transition-all transform hover:-translate-y-2 shadow-lg shadow-black/5`}
                   >
                 <div>
                   <div className="text-3xl font-display font-black text-primary-text mb-1">{stat.value}</div>
                   <div className="text-xs text-primary-secondary font-bold tracking-[0.2em] uppercase opacity-60 group-hover:opacity-100 transition-opacity">{stat.label}</div>
                 </div>
-                <div className="p-4 rounded-2xl bg-white/5 group-hover:scale-110 transition-transform shadow-inner">
+                <div className="p-4 rounded-2xl bg-accent/5 group-hover:bg-accent/10 transition-colors shadow-inner border border-accent/5">
                   {stat.icon}
                 </div>
               </motion.div>

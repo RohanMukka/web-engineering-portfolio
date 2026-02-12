@@ -15,6 +15,16 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: 'Web Engineering',
+    tagline: 'High-Performance Systems',
+    description: 'My flagship portfolio featuring advanced animations, custom cursor systems, and multi-theme support. Built for maximum performance and UX.',
+    tags: ['TypeScript', 'React', 'Framer Motion'],
+    category: 'Web',
+    links: { github: 'https://github.com/RohanMukka/web-engineering-portfolio', demo: 'https://web-engineering-portfolio.vercel.app' },
+    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1510&auto=format&fit=crop',
+    color: '#ea4335'
+  },
+  {
     title: 'BEneFIT',
     tagline: 'Succeed or Pay the Price',
     description: 'Decentralized fitness accountability with ETH staking and smart contracts. Users stake ETH and earn it back by completing workout goals verified by oracles.',
@@ -30,50 +40,80 @@ const projects: Project[] = [
     description: 'Personal finance tracker with TypeScript and Firebase. Features real-time visualization of spending habits and budget categorization.',
     tags: ['TypeScript', 'Firebase', 'React'],
     category: 'Web',
-    links: { github: 'https://github.com/RohanMukka/spendsmart', demo: '#' },
+    links: { github: 'https://github.com/RohanMukka/spendsmart', demo: 'https://spendsmart-three.vercel.app/' },
     image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1626&auto=format&fit=crop',
     color: '#2ecc71'
   },
   {
+    title: 'Diagnostic AI',
+    tagline: 'Hybrid ML Logic',
+    description: 'A robust diagnostic system leveraging explicit domain knowledge and learned data patterns for high-precision diagnostic insights.',
+    tags: ['Python', 'ML', 'Diagnostics'],
+    category: 'ML',
+    links: { github: 'https://github.com/RohanMukka/A-Robust-Diagnostic-System-Leveraging-Explicit-Domain-Knowledge-and-Learned-Data-Patterns' },
+    image: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=1480&auto=format&fit=crop',
+    color: '#3776ab'
+  },
+  {
+    title: 'FitPrep',
+    tagline: 'Plan. Eat. Lift.',
+    description: 'Comprehensive fitness planning platform for individualized nutrition and workout tracking. Deployed with optimal edge performance.',
+    tags: ['React', 'Health', 'TypeScript'],
+    category: 'Web',
+    links: { github: 'https://github.com/RohanMukka/fitprep', demo: 'https://fitprep.vercel.app' },
+    image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=1453&auto=format&fit=crop',
+    color: '#1abc9c'
+  },
+  {
+    title: 'IPMS',
+    tagline: 'Project Management Redefined',
+    description: 'Integrated Project Management System featuring enterprise-grade tracking and collaborative workspace environments.',
+    tags: ['JavaScript', 'System', 'Teamwork'],
+    category: 'System',
+    links: { github: 'https://github.com/IPMS-Project/IPMS' },
+    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1470&auto=format&fit=crop',
+    color: '#3498db'
+  },
+  {
+    title: 'JAI',
+    tagline: 'Neural Integration Core',
+    description: 'High-performance framework focused on JavaScript AI integration and neural pattern recognition development.',
+    tags: ['TypeScript', 'AI', 'JavaScript'],
+    category: 'ML',
+    links: { github: 'https://github.com/RohanMukka/JAI' },
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1632&auto=format&fit=crop',
+    color: '#f7df1e'
+  },
+  {
+    title: 'Portfolio V1',
+    tagline: 'Modern Web Identity',
+    description: 'A personal portfolio website showcasing work and projects. Built with TypeScript for type-safe development and modern web technologies.',
+    tags: ['TypeScript', 'Vercel', 'Responsive'],
+    category: 'Web',
+    links: { github: 'https://github.com/RohanMukka/portfolio', demo: 'https://portfolio-rohan03.vercel.app/' },
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop',
+    color: '#3178c6'
+  },
+  {
     title: 'Emotion Recog',
     tagline: 'AI That Feels',
-    description: 'ML-based emotion classification from EEG signals using deep learning techniques to interpret brainwave patterns.',
-    tags: ['Python', 'ML', 'EEG'],
+    description: 'Deep learning classification of human emotions through high-resolution EEG signal interpretation and signal processing.',
+    tags: ['Python', 'DL', 'Biosensor'],
     category: 'ML',
     links: { github: 'https://github.com/RohanMukka/Multiclass-Emotion-Recognition-from-EEG-Signals' },
     image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1530&auto=format&fit=crop',
     color: '#9b59b6'
   },
   {
-    title: 'Patient Network',
-    tagline: 'Healthcare Streamlined',
-    description: 'Database system for patient management and complex queries. Optimized for hospital workflows and data integrity.',
-    tags: ['Java', 'SQL'],
+    title: 'FeeAutomation',
+    tagline: 'FinTech Optimization',
+    description: 'Enterprise automation tool for fee processing, financial management, and automated transaction auditing.',
+    tags: ['JavaScript', 'Finance', 'Automation'],
     category: 'System',
-    links: { github: 'https://github.com/RohanMukka/Patient-Assistant-Network-Database-System' },
-    image: 'https://images.unsplash.com/photo-1538108149393-fbbd81895907?q=80&w=1528&auto=format&fit=crop',
-    color: '#e74c3c'
-  },
-  {
-    title: 'Poly Detect',
-    tagline: 'Uncovering Bias',
-    description: 'NLP model for polarization detection in multilingual text. Analyzes sentiment and bias across different languages.',
-    tags: ['NLP', 'Python'],
-    category: 'ML',
-    links: { github: 'https://github.com/RohanMukka/Multilingual-Polarization-Detection' },
-    image: 'https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=1470&auto=format&fit=crop',
-    color: '#e67e22'
-  },
-  {
-    title: 'FitPrep',
-    tagline: 'Plan. Eat. Lift.',
-    description: 'Fitness planning and tracking for workouts and nutrition. Generates personalized meal and workout plans.',
-    tags: ['Web', 'Health'],
-    category: 'Web',
-    links: { github: 'https://github.com/RohanMukka/fitprep', demo: '#' },
-    image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=1453&auto=format&fit=crop',
-    color: '#1abc9c'
-  },
+    links: { github: 'https://github.com/RohanMukka/FeeAutomation' },
+    image: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=1548&auto=format&fit=crop',
+    color: '#f1c40f'
+  }
 ];
 
 const ProjectCard = ({ project }: { project: Project }) => {
@@ -216,7 +256,11 @@ const Projects = () => {
               <button
                 key={cat}
                 onClick={() => setFilter(cat as any)}
-                className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${filter === cat ? 'bg-primary-text text-white shadow-lg shadow-primary-text/20' : 'text-primary-secondary hover:text-primary-text hover:bg-white/5'}`}
+                className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
+                  filter === cat 
+                  ? 'bg-primary-text text-background shadow-lg scale-105' 
+                  : 'text-primary-secondary hover:text-primary-text hover:bg-bg-elevated/50'
+                }`}
               >
                 {cat}
               </button>

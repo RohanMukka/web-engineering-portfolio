@@ -129,7 +129,7 @@ const Education = () => {
                                         {educationData[1].period}
                                     </span>
                                     <motion.span 
-                                        className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-bold bg-accent text-white shadow-xl shadow-accent/20"
+                                        className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-extrabold bg-accent text-white shadow-lg shadow-accent/30"
                                         whileHover={{ scale: 1.05 }}
                                     >
                                         <Award size={14} />
@@ -193,7 +193,7 @@ const Education = () => {
                                         <Calendar size={12} />
                                         {educationData[0].period}
                                     </span>
-                                    <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-bold bg-primary-orange text-white shadow-xl shadow-primary-orange/20">
+                                    <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-extrabold bg-accent text-white shadow-lg shadow-accent/30">
                                         <Award size={14} />
                                         GPA: {educationData[0].gpa}
                                     </span>

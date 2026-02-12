@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import { MousePointer2, ChevronDown, Menu, X as CloseIcon } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 
 interface NavbarProps {
@@ -132,7 +133,7 @@ const Navbar = ({ isScrolled = false }: NavbarProps) => {
             );
           })}
           
-          <div className="ml-4 flex items-center">
+          <div className="ml-4 flex items-center gap-4">
             <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
           </div>
         </div>
@@ -206,10 +207,10 @@ const Navbar = ({ isScrolled = false }: NavbarProps) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
             >
-              <div className="flex items-center gap-4 text-primary-text">
-                <span className="text-sm font-bold uppercase tracking-widest opacity-60">Theme</span>
-                <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-              </div>
+                <div className="flex items-center gap-4 text-primary-text">
+                  <span className="text-sm font-bold uppercase tracking-widest opacity-60">Theme</span>
+                  <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+                </div>
               <div className="text-xs text-primary-secondary font-medium tracking-wide">
                 © {new Date().getFullYear()} ROHAN MUKKA
               </div>
