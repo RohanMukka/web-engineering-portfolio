@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useAnimation, useSpring, useMotionValue } from 'framer-motion';
 import FloatingParticles from '../components/FloatingParticles';
+import TiltedCard from '../components/TiltedCard';
 
 const MagneticButton = ({ children, className, href }: { children: React.ReactNode, className?: string, href: string }) => {
   const ref = useRef<HTMLAnchorElement>(null);
@@ -113,28 +114,31 @@ const Hero = () => {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="relative w-[300px] h-[400px] md:w-[400px] md:h-[500px]">
-             <motion.div
-               className="w-full h-full relative z-10 rounded-2xl overflow-hidden shadow-2xl"
-               whileHover={{ 
-                 scale: 1.02,
-                 boxShadow: "0 25px 50px -12px rgba(var(--accent-rgb), 0.25)"
-               }}
-               transition={{ duration: 0.4 }}
-             >
-               <img 
-                 src="/hero-profile.png" 
-                 alt="Rohan Mukka"
-                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105" 
-               />
-               <div className="absolute inset-0 bg-gradient-to-tr from-accent/0 via-accent/5 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-             </motion.div>
+             <TiltedCard
+               imageSrc="/hero-profile.png"
+               altText="Rohan Mukka - Full Stack Developer"
+               captionText="Rohan Mukka • Full Stack Developer"
+               containerHeight="100%"
+               containerWidth="100%"
+               imageHeight="100%"
+               imageWidth="100%"
+               rotateAmplitude={12}
+               scaleOnHover={1.05}
+               showMobileWarning={false}
+               showTooltip={true}
+               displayOverlayContent={true}
+               overlayContent={
+                 <div className="absolute inset-0 bg-gradient-to-tr from-accent/0 via-accent/5 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[15px]"></div>
+               }
+             />
+             
              <motion.div 
-               className="absolute -z-10 top-6 -left-6 w-full h-full border-2 border-primary-text/20 rounded-2xl"
+               className="absolute -z-10 top-6 -left-6 w-full h-full border-2 border-primary-text/20 rounded-2xl pointer-events-none"
                animate={{ x: [0, 5, 0], y: [0, -5, 0] }}
                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
              ></motion.div>
-             <div className="absolute -top-10 -right-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl animate-pulse"></div>
-             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary-blue/10 rounded-full blur-3xl animate-pulse delay-700"></div>
+             <div className="absolute -top-10 -right-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
+             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary-blue/10 rounded-full blur-3xl animate-pulse delay-700 pointer-events-none"></div>
           </div>
         </motion.div>
 
