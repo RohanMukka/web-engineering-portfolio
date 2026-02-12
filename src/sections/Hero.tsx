@@ -99,7 +99,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative flex items-center justify-center min-h-screen px-6 overflow-hidden py-24 md:py-0">
+    <section id="hero" className="relative flex items-center justify-center min-h-[100dvh] px-6 overflow-hidden py-24 md:py-0">
       <FloatingParticles count={30} />
       
 

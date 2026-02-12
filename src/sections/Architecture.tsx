@@ -7,7 +7,7 @@ const Architecture = () => {
   return (
     <SectionContainer id="architecture">
       <motion.div
-        className="max-w-6xl mx-auto p-8 md:p-16 rounded-[2.5rem] glass-card backdrop-blur-3xl border border-white/10 relative overflow-hidden"
+        className="max-w-6xl mx-auto p-6 md:p-16 rounded-[2.5rem] glass-card backdrop-blur-3xl border border-white/10 relative overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-10%" }}
@@ -23,7 +23,7 @@ const Architecture = () => {
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           <div className="lg:col-span-8 space-y-8">
-            <div className="space-y-6 text-xl text-primary-text leading-[1.8] font-medium opacity-90">
+            <div className="space-y-6 text-lg md:text-xl text-primary-text leading-[1.8] font-medium opacity-90">
               <p>
                   Since <span className="text-accent font-black">2020</span>, I've been obsessed with the art of digital construction. What started as simple curiosity has grown into a deep-seated passion for architectural integrity and performance.
               </p>

@@ -22,8 +22,8 @@ const TechRibbon = () => {
         }}
       >
         {[...techStack, ...techStack, ...techStack].map((tech, i) => (
-          <div key={i} className="flex items-center gap-6 mx-8">
-            <span className="text-3xl md:text-5xl font-display font-black text-primary-text opacity-10 uppercase tracking-tighter hover:opacity-100 transition-opacity cursor-default">
+          <div key={i} className="flex items-center gap-4 md:gap-6 mx-4 md:mx-8">
+            <span className="text-2xl md:text-5xl font-display font-black text-primary-text opacity-10 uppercase tracking-tighter hover:opacity-100 transition-opacity cursor-default">
               {tech}
             </span>
             <span className="w-2 h-2 rounded-full bg-accent opacity-20"></span>
