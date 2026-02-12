@@ -50,8 +50,8 @@ const Architecture = () => {
           <div className="lg:col-span-4 grid grid-cols-1 gap-5">
             {[
               { label: "Experience", value: "4+ Yrs", icon: <Calendar className="text-accent" />, color: "border-accent/10" },
-              { label: "Built", value: "15+ Proj", icon: <Rocket className="text-primary-blue" />, color: "border-primary-blue/10" },
-              { label: "Mastered", value: "12+ Tech", icon: <Code2 className="text-primary-purple" />, color: "border-primary-purple/10" },
+              { label: "Built", value: "15+ Proj", icon: <Rocket className="text-primary-blue" />, color: "border-blue-500/10" },
+              { label: "Mastered", value: "12+ Tech", icon: <Code2 className="text-primary-purple" />, color: "border-purple-500/10" },
             ].map((stat, i) => (
                   <motion.div 
                     key={stat.label}
@@ -59,7 +59,7 @@ const Architecture = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 + (i * 0.1), duration: 0.5 }}
-                    className={`p-8 rounded-[2.5rem] bg-bg-elevated/80 border-2 ${stat.color} flex items-center justify-between group hover:bg-bg-elevated transition-all transform hover:-translate-y-2 shadow-lg shadow-black/5`}
+                    className={`p-8 rounded-[2.5rem] bg-bg-elevated/60 backdrop-blur-xl border-2 ${stat.color} flex items-center justify-between group hover:bg-bg-elevated transition-all transform hover:-translate-y-2 shadow-lg shadow-black/5 mx-auto w-full`}
                   >
                 <div>
                   <div className="text-3xl font-display font-black text-primary-text mb-1">{stat.value}</div>

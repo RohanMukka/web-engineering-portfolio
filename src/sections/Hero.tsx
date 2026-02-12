@@ -1,18 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useAnimation, useSpring, useMotionValue } from 'framer-motion';
 import FloatingParticles from '../components/FloatingParticles';
+
+const MagneticButton = ({ children, className, href }: { children: React.ReactNode, className?: string, href: string }) => {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springConfig = { damping: 15, stiffness: 150 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = ref.current.getBoundingClientRect();
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+    const distanceX = clientX - centerX;
+    const distanceY = clientY - centerY;
+    
+    x.set(distanceX * 0.3);
+    y.set(distanceY * 0.3);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.a
+      ref={ref}
+      href={href}
+      className={className}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ x: springX, y: springY }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      {children}
+    </motion.a>
+  );
+};
 
 const Hero = () => {
   const [words, setWords] = useState([
     [
-      { char: 'R', id: 'swap-1', needsShake: true }, // Starts as Rohan
+      { char: 'R', id: 'swap-1', needsShake: true },
       { char: 'o', id: 'o-1' },
       { char: 'h', id: 'h-1' },
       { char: 'a', id: 'a-1' },
       { char: 'n', id: 'n-1' },
     ],
     [
-      { char: 'M', id: 'swap-2', needsShake: true }, // Starts as Mukka
+      { char: 'M', id: 'swap-2', needsShake: true },
       { char: 'u', id: 'u-1' },
       { char: 'k', id: 'k-1' },
       { char: 'k', id: 'k-2' },
@@ -20,16 +63,7 @@ const Hero = () => {
     ]
   ]);
 
-  const [stage, setStage] = useState('initial'); // initial -> entry -> shake -> swap
-
-  useEffect(() => {
-    const sequence = async () => {
-      // 1. Just show entry animation
-      setStage('swapped');
-    };
-
-    sequence();
-  }, []);
+  const [stage, setStage] = useState('swapped');
 
   const letterAnimation = {
     whileHover: { 
@@ -53,16 +87,13 @@ const Hero = () => {
     }),
     shake: (i: number) => ({
       x: [0, -5, 5, -5, 5, 0],
-      opacity: 1, // Ensure visibility
+      opacity: 1,
       color: "#ef4444",
-      filter: "blur(0px)",
-      scale: 1,
-      rotate: 0,
       transition: { duration: 0.5 }
     }),
     swapped: {
-      x: 0, y: 0, scale: 1, rotate: 0, filter: "blur(0px)", opacity: 1, // Ensure visibility
-      color: "var(--text-primary)", // Use theme variable for visibility
+      x: 0, y: 0, scale: 1, rotate: 0, filter: "blur(0px)", opacity: 1,
+      color: "var(--text-primary)",
       transition: { duration: 0.5 }
     }
   };
@@ -70,6 +101,21 @@ const Hero = () => {
   return (
     <section id="hero" className="relative flex items-center justify-center min-h-screen px-6 overflow-hidden py-24 md:py-0">
       <FloatingParticles count={30} />
+      
+      {/* Live Status Badge */}
+      <motion.div 
+        className="absolute top-32 right-8 md:right-16 flex items-center gap-3 px-4 py-2 rounded-full glass-card border-green-500/20"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1 }}
+      >
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+        </span>
+        <span className="text-xs font-bold tracking-widest uppercase text-primary-text opacity-80">Available for full time roles</span>
+      </motion.div>
+
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-center">
         
         {/* Left Column: Image */}
@@ -77,10 +123,9 @@ const Hero = () => {
           className="relative order-2 md:order-1 flex justify-center md:justify-end group"
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }} // Fast start, slow end
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="relative w-[300px] h-[400px] md:w-[400px] md:h-[500px]">
-             {/* Main Image with Premium Hover */}
              <motion.div
                className="w-full h-full relative z-10 rounded-2xl overflow-hidden shadow-2xl"
                whileHover={{ 
@@ -94,30 +139,13 @@ const Hero = () => {
                  alt="Rohan Mukka"
                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105" 
                />
-               
-               {/* Subtle Overlay Glow */}
                <div className="absolute inset-0 bg-gradient-to-tr from-accent/0 via-accent/5 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
              </motion.div>
-             
-             {/* Decorative Elements with Animations */}
              <motion.div 
                className="absolute -z-10 top-6 -left-6 w-full h-full border-2 border-primary-text/20 rounded-2xl"
-               animate={{ 
-                 x: [0, 5, 0],
-                 y: [0, -5, 0]
-               }}
+               animate={{ x: [0, 5, 0], y: [0, -5, 0] }}
                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
              ></motion.div>
-             <motion.div 
-               className="absolute -z-20 top-12 -left-12 w-full h-full bg-surface-subtle rounded-2xl"
-               animate={{ 
-                 x: [0, -5, 0],
-                 y: [0, 5, 0]
-               }}
-               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-             ></motion.div>
-
-             {/* Floating Accent Blobs */}
              <div className="absolute -top-10 -right-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl animate-pulse"></div>
              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary-blue/10 rounded-full blur-3xl animate-pulse delay-700"></div>
           </div>
@@ -129,44 +157,28 @@ const Hero = () => {
             className="text-primary-secondary text-sm uppercase tracking-[0.2em] mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
           >
             Full Stack Developer
           </motion.p>
           
           <motion.h1
             className="text-5xl sm:text-6xl lg:text-[7rem] font-display font-bold tracking-tighter text-primary-text leading-[0.9] mb-8 flex flex-wrap justify-center md:justify-start gap-x-4 w-full"
-            layout // Enable layout animation for the container
+            layout
           >
             {words.map((word, wordIndex) => (
               <span key={wordIndex} className="inline-block whitespace-nowrap">
                 {word.map((item, letterIndex) => {
                   const uniqueIndex = wordIndex * 10 + letterIndex;
-                  const isSwapper = item.needsShake;
-                  
-                  // Determine which variant to animate to
-                  let animateState = 'entry';
-                  if (stage === 'initial') animateState = 'initial';
-                  else if (stage === 'shake' && isSwapper) animateState = 'shake';
-                  else if (stage === 'swapped') animateState = 'swapped';
-                  else animateState = 'entry'; // Default idle state
-
-                  // For the shaking items, we want to animate specifically when stage is shake
-                  // But for normal items, we just want them to hold their 'entry' position (x:0, y:0)
-
                   return (
                     <motion.span
-                      layoutId={item.id} // Critical: allows animation across different parents
-                      key={item.id} // Key must track the identity of the letter, not the index
+                      layoutId={item.id}
+                      key={item.id}
                       className="inline-block cursor-default relative"
-                      custom={uniqueIndex} // Pass index to variants
+                      custom={uniqueIndex}
                       initial="initial"
-                      animate={animateState}
+                      animate={stage === 'swapped' ? 'swapped' : 'entry'}
                       variants={variants}
                       whileHover={letterAnimation.whileHover}
-                      transition={{ 
-                         layout: { duration: 0.8, type: "spring", bounce: 0.2 } // Smooths the swap
-                      }}
                     >
                       {item.char}
                     </motion.span>
@@ -191,18 +203,18 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            <a
+            <MagneticButton 
               href="#projects"
-              className="btn-cta inline-flex items-center gap-2 px-8 py-4 rounded-lg text-base"
+              className="btn-cta inline-flex items-center gap-2 px-10 py-5 rounded-xl text-base"
             >
               View work
-            </a>
-            <a
+            </MagneticButton>
+            <MagneticButton 
               href="#contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-primary-text glass-card hover:border-accent/40 shadow-none hover:shadow-lg hover:scale-105 active:scale-95 transition-all text-base"
+              className="inline-flex items-center gap-2 px-10 py-5 rounded-xl text-primary-text glass-card hover:border-accent/40 shadow-none hover:shadow-lg transition-all text-base"
             >
               Get in touch
-            </a>
+            </MagneticButton>
           </motion.div>
         </div>
 

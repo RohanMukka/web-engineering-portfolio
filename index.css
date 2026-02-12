@@ -13,18 +13,17 @@
 
 @layer base {
   :root {
-    /* Warm cream theme (Light) */
+    /* Warm cream theme (Light) with Royal Blue Typography */
     --bg-primary: #f8f6f2;
     --bg-elevated: #ffffff;
-    --text-primary: #020b1f;
-    /* Darker for better contrast */
-    --text-secondary: #2d334a;
-    --text-tertiary: #5c6a8a;
+    --text-primary: #002366;
+    /* Royal Blue */
+    --text-secondary: #003399aa;
+    --text-tertiary: #00339977;
     --glass-bg: rgba(255, 255, 255, 0.7);
-    /* More opaque */
-    --glass-border: rgba(2, 11, 31, 0.12);
-    --glass-shadow: rgba(2, 11, 31, 0.05);
-    --surface-subtle: rgba(2, 11, 31, 0.04);
+    --glass-border: rgba(0, 35, 102, 0.12);
+    --glass-shadow: rgba(0, 35, 102, 0.05);
+    --surface-subtle: rgba(0, 35, 102, 0.04);
     --accent: #c45c26;
     --accent-rgb: 196, 92, 38;
     --accent-dim: rgba(196, 92, 38, 0.15);

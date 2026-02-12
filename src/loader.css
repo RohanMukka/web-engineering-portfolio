@@ -10,14 +10,13 @@
 }
 
 .digit {
-    color: #00ff88;
-    font-family: monospace;
-    font-size: 18px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-weight: 900;
+    font-size: 20px;
     text-align: center;
-    text-shadow: 0 0 5px #00ff88;
     animation:
-        matrix-fall 2s infinite,
-        matrix-flicker 0.5s infinite;
+        matrix-fall 2s infinite;
     opacity: 0;
 }
 
@@ -60,7 +59,7 @@
     right: 0;
     bottom: 0;
     background: radial-gradient(circle,
-            rgba(0, 255, 136, 0.1) 0%,
+            var(--accent-dim) 0%,
             transparent 70%);
     animation: matrix-pulse 2s infinite;
 }

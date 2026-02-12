@@ -13,6 +13,8 @@ import BackToTop from './components/BackToTop';
 import CustomCursor, { CursorType } from './components/CustomCursor';
 import CursorCustomizer from './components/CursorCustomizer';
 import Background from './components/Background';
+import TechRibbon from './components/TechRibbon';
+import SystemHUD from './components/SystemHUD';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -45,7 +47,8 @@ const App = () => {
   }
 
   return (
-    <div className={`bg-background text-primary-text relative min-h-screen ${cursorType !== 'default' ? 'cursor-none' : ''}`}>
+    <div className={`bg-transparent text-primary-text relative min-h-screen ${cursorType !== 'default' ? 'cursor-none' : ''}`}>
+      <SystemHUD />
       <CustomCursor type={cursorType} />
       <Background />
       <Navbar 
@@ -62,6 +65,7 @@ const App = () => {
 
       <main className="relative w-full overflow-x-hidden">
         <Hero />
+        <TechRibbon />
         <Architecture />
         <Projects />
         <Skills />
