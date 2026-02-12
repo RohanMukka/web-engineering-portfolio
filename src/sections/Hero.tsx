@@ -102,19 +102,6 @@ const Hero = () => {
     <section id="hero" className="relative flex items-center justify-center min-h-screen px-6 overflow-hidden py-24 md:py-0">
       <FloatingParticles count={30} />
       
-      {/* Live Status Badge */}
-      <motion.div 
-        className="absolute top-32 right-8 md:right-16 flex items-center gap-3 px-4 py-2 rounded-full glass-card border-green-500/20"
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1 }}
-      >
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-        </span>
-        <span className="text-xs font-bold tracking-widest uppercase text-primary-text opacity-80">Available for full time roles</span>
-      </motion.div>
 
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-center">
         

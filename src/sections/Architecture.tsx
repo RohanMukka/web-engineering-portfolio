@@ -29,7 +29,7 @@ const Architecture = () => {
               </p>
 
               <p>
-                  I don't just write code; I design systems. Currently specializing in <span className="text-primary-text font-black underline decoration-accent/40 decoration-4 underline-offset-4">Full-Stack Scalability</span> and <span className="text-primary-text font-black underline decoration-accent/40 decoration-4 underline-offset-4">Intelligent Automation</span> at the University of Oklahoma, I believe that every pixel and every line of logic should serve a purpose.
+                  I don't just write code; I design systems. Currently specializing in <span className="text-primary-text font-black">Full-Stack Scalability</span> and <span className="text-primary-text font-black">Intelligent Automation</span> at the University of Oklahoma, I believe that every pixel and every line of logic should serve a purpose.
               </p>
             </div>
             
