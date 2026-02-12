@@ -79,30 +79,40 @@ const ProjectCard = ({ project }: { project: Project }) => {
       onMouseLeave={() => setIsFlipped(false)}
     >
       <motion.div
-        className="w-full h-full relative preserve-3d transition-all duration-500"
+        className="w-full h-full relative preserve-3d transition-all duration-500 rounded-2xl"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
+        whileHover={{ 
+          y: -12,
+          boxShadow: "0 20px 40px -15px var(--glass-shadow), 0 0 20px 1px var(--accent-dim)"
+        }}
+        transition={{ 
+          type: "spring", 
+          stiffness: 260, 
+          damping: 20 
+        }}
       >
         {/* Front Face */}
-        <div className="absolute inset-0 w-full h-full backface-hidden rounded-2xl overflow-hidden shadow-lg border border-glass-border bg-white">
+        <div className="absolute inset-0 w-full h-full backface-hidden rounded-2xl overflow-hidden glass-card">
           <img 
             src={project.image} 
             alt={project.title} 
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+            loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-8">
-            <h3 className="text-3xl font-display font-bold text-white mb-1">{project.title}</h3>
-            <p className="text-white/80 text-sm font-medium tracking-wide uppercase mb-3">{project.tagline}</p>
+          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent flex flex-col justify-end p-8">
+            <h3 className="text-3xl font-display font-bold text-primary-text mb-1">{project.title}</h3>
+            <p className="text-primary-secondary text-sm font-medium tracking-wide uppercase mb-3">{project.tagline}</p>
             <div className="h-1 w-12 rounded-full" style={{ backgroundColor: project.color }}></div>
           </div>
         </div>
 
         {/* Back Face */}
         <div 
-          className="absolute inset-0 w-full h-full backface-hidden rounded-2xl overflow-hidden shadow-lg border border-glass-border bg-white p-8 flex flex-col rotate-y-180"
+          className="absolute inset-0 w-full h-full backface-hidden rounded-2xl overflow-hidden glass-card p-8 flex flex-col"
           style={{ transform: 'rotateY(180deg)' }}
         >
           <div className="flex justify-between items-start mb-6">
-            <h3 className="text-2xl font-display font-bold text-primary-text" style={{ color: project.color }}>
+            <h3 className="text-2xl font-display font-bold" style={{ color: project.color }}>
               {project.title}
             </h3>
             <div className="flex gap-3">
@@ -111,7 +121,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
                   href={project.links.github} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="p-2 rounded-full hover:bg-surface-subtle transition-colors text-primary-text"
+                  className="p-2 rounded-full hover:bg-white/20 transition-colors text-primary-text"
                   title="View GitHub"
                 >
                   <Github size={20} />
@@ -122,7 +132,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
                   href={project.links.demo} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="p-2 rounded-full hover:bg-surface-subtle transition-colors text-primary-text"
+                  className="p-2 rounded-full hover:bg-white/20 transition-colors text-primary-text"
                   title="View Source"
                 >
                   <ExternalLink size={20} />
@@ -139,7 +149,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
             {project.tags.map(tag => (
               <span 
                 key={tag} 
-                className="px-3 py-1 text-xs font-semibold rounded-full bg-surface-subtle text-primary-text border border-primary-secondary/10"
+                className="px-3 py-1 text-xs font-semibold rounded-full bg-white/20 text-primary-text border border-white/10"
               >
                 {tag}
               </span>
@@ -193,14 +203,14 @@ const Projects = () => {
           <div className="hidden md:flex gap-4">
             <button 
               onClick={() => scroll('left')}
-              className="p-3 rounded-full border border-primary-secondary/20 hover:bg-surface-subtle hover:border-accent transition-all text-primary-text"
+              className="p-3 rounded-full border border-primary-secondary/20 hover:bg-surface-subtle hover:border-accent transition-all text-primary-text hover:scale-110 active:scale-95"
               aria-label="Scroll left"
             >
               <ChevronLeft size={24} />
             </button>
             <button 
               onClick={() => scroll('right')}
-              className="p-3 rounded-full border border-primary-secondary/20 hover:bg-surface-subtle hover:border-accent transition-all text-primary-text"
+              className="p-3 rounded-full border border-primary-secondary/20 hover:bg-surface-subtle hover:border-accent transition-all text-primary-text hover:scale-110 active:scale-95"
               aria-label="Scroll right"
             >
               <ChevronRight size={24} />

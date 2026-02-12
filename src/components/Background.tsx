@@ -19,7 +19,7 @@ const Background = () => {
 
       {/* Primary Blue Orb - Moving Top Left */}
       <motion.div
-        className="absolute -top-[10%] -left-[10%] w-[40vw] h-[40vw] rounded-full bg-[#021e62] opacity-5 mix-blend-multiply blur-3xl"
+        className="absolute -top-[10%] -left-[10%] w-[40vw] h-[40vw] rounded-full bg-[#021e62] opacity-[0.08] blur-3xl"
         animate={{
           x: [0, 50, 0],
           y: [0, 100, 0],
@@ -34,7 +34,7 @@ const Background = () => {
 
       {/* Accent Orange Orb - Moving Center Right */}
       <motion.div
-        className="absolute top-[20%] -right-[5%] w-[35vw] h-[35vw] rounded-full bg-[#c45c26] opacity-[0.04] mix-blend-multiply blur-3xl"
+        className="absolute top-[20%] -right-[5%] w-[35vw] h-[35vw] rounded-full bg-[#c45c26] opacity-[0.07] blur-3xl"
         animate={{
           x: [0, -70, 0],
           y: [0, 50, 0],
@@ -50,7 +50,7 @@ const Background = () => {
 
       {/* Purple/Secondary Orb - Moving Bottom Left */}
       <motion.div
-        className="absolute bottom-[10%] left-[20%] w-[45vw] h-[45vw] rounded-full bg-[#8b5cf6] opacity-[0.04] mix-blend-multiply blur-3xl"
+        className="absolute bottom-[10%] left-[20%] w-[45vw] h-[45vw] rounded-full bg-[#8b5cf6] opacity-[0.06] blur-3xl"
         animate={{
           x: [0, 60, 0],
           y: [0, -60, 0],

@@ -2,32 +2,32 @@ import React, { useState } from 'react';
 import './ResumeButton.css';
 import { Download } from 'lucide-react';
 
-const ResumeButton = () => {
+interface ResumeButtonProps {
+  isCompact?: boolean;
+}
+
+const ResumeButton = ({ isCompact = false }: ResumeButtonProps) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleDownload = () => {
     if (!isChecked) {
       setIsChecked(true);
-      // Wait for animation to complete
       setTimeout(() => {
-        // Trigger actual download here
         const link = document.createElement('a');
-        link.href = '/Rohan_Mukka_Resume.pdf'; // Assuming resume is in public folder
+        link.href = '/Rohan_Mukka_Resume.pdf';
         link.download = 'Rohan_Mukka_Resume.pdf';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-
-        // Reset button state automatically after download so it can be clicked again
         setTimeout(() => {
           setIsChecked(false);
         }, 1500); 
-      }, 3500); // 3.5s matches the CSS animation duration
+      }, 3500);
     }
   };
 
   return (
-    <label className="resume-label">
+    <label className={`resume-label ${isCompact ? 'compact' : ''}`}>
       <input 
         type="checkbox" 
         className="resume-input" 
@@ -39,8 +39,12 @@ const ResumeButton = () => {
         <Download className="resume-icon" />
         <div className="resume-square"></div>
       </span>
-      <p className="resume-title text-base font-semibold">Resume</p>
-      <p className="resume-title text-base font-semibold">Resume</p>
+      {!isCompact && (
+        <>
+          <p className="resume-title text-base font-semibold">Resume</p>
+          <p className="resume-title text-base font-semibold">Resume</p>
+        </>
+      )}
     </label>
   );
 };

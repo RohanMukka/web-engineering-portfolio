@@ -1,8 +1,34 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 
 const Hero = () => {
-  const name = "Rohan Mukka";
+  const [words, setWords] = useState([
+    [
+      { char: 'R', id: 'swap-1', needsShake: true }, // Starts as Rohan
+      { char: 'o', id: 'o-1' },
+      { char: 'h', id: 'h-1' },
+      { char: 'a', id: 'a-1' },
+      { char: 'n', id: 'n-1' },
+    ],
+    [
+      { char: 'M', id: 'swap-2', needsShake: true }, // Starts as Mukka
+      { char: 'u', id: 'u-1' },
+      { char: 'k', id: 'k-1' },
+      { char: 'k', id: 'k-2' },
+      { char: 'a', id: 'a-2' },
+    ]
+  ]);
+
+  const [stage, setStage] = useState('initial'); // initial -> entry -> shake -> swap
+
+  useEffect(() => {
+    const sequence = async () => {
+      // 1. Just show entry animation
+      setStage('swapped');
+    };
+
+    sequence();
+  }, []);
 
   const letterAnimation = {
     whileHover: { 
@@ -10,8 +36,34 @@ const Hero = () => {
       scaleX: 0.9,
       y: -10,
       color: "var(--accent)"
+    }
+  };
+
+  const variants = {
+    initial: (i: number) => {
+       const startX = (i % 2 === 0 ? -150 : 150) + (i * 10);
+       const startY = (i % 3 === 0 ? -150 : 150) + (i * 5);
+       const startRotate = (i % 2 === 0 ? -45 : 45);
+       return { opacity: 0, x: startX, y: startY, scale: 2, rotate: startRotate, filter: "blur(10px)" };
     },
-    transition: { type: "spring", stiffness: 300, damping: 10 }
+    entry: (i: number) => ({
+      opacity: 1, x: 0, y: 0, scale: 1, rotate: 0, filter: "blur(0px)",
+      transition: { duration: 0.8, delay: 0.1 + (i * 0.08), type: "spring", bounce: 0.5 }
+    }),
+    shake: (i: number) => ({
+      x: [0, -5, 5, -5, 5, 0],
+      opacity: 1, // Ensure visibility
+      color: "#ef4444",
+      filter: "blur(0px)",
+      scale: 1,
+      rotate: 0,
+      transition: { duration: 0.5 }
+    }),
+    swapped: {
+      x: 0, y: 0, scale: 1, rotate: 0, filter: "blur(0px)", opacity: 1, // Ensure visibility
+      color: "var(--text-primary)", // Use theme variable for visibility
+      transition: { duration: 0.5 }
+    }
   };
 
   return (
@@ -40,7 +92,7 @@ const Hero = () => {
         </motion.div>
 
         {/* Right Column: Content */}
-        <div className="flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2 z-10">
+        <div className="flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2 z-10 w-full">
           <motion.p
             className="text-primary-secondary text-sm uppercase tracking-[0.2em] mb-4"
             initial={{ opacity: 0, y: 20 }}
@@ -51,22 +103,43 @@ const Hero = () => {
           </motion.p>
           
           <motion.h1
-            className="text-5xl sm:text-6xl lg:text-[7rem] font-display font-bold tracking-tighter text-primary-text leading-[0.9] mb-8 flex flex-wrap justify-center md:justify-start gap-x-4"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, type: "spring" }}
+            className="text-5xl sm:text-6xl lg:text-[7rem] font-display font-bold tracking-tighter text-primary-text leading-[0.9] mb-8 flex flex-wrap justify-center md:justify-start gap-x-4 w-full"
+            layout // Enable layout animation for the container
           >
-            {name.split(" ").map((word, wordIndex) => (
+            {words.map((word, wordIndex) => (
               <span key={wordIndex} className="inline-block whitespace-nowrap">
-                {Array.from(word).map((letter, letterIndex) => (
-                  <motion.span
-                    key={`${wordIndex}-${letterIndex}`}
-                    className="inline-block cursor-default"
-                    {...letterAnimation}
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
+                {word.map((item, letterIndex) => {
+                  const uniqueIndex = wordIndex * 10 + letterIndex;
+                  const isSwapper = item.needsShake;
+                  
+                  // Determine which variant to animate to
+                  let animateState = 'entry';
+                  if (stage === 'initial') animateState = 'initial';
+                  else if (stage === 'shake' && isSwapper) animateState = 'shake';
+                  else if (stage === 'swapped') animateState = 'swapped';
+                  else animateState = 'entry'; // Default idle state
+
+                  // For the shaking items, we want to animate specifically when stage is shake
+                  // But for normal items, we just want them to hold their 'entry' position (x:0, y:0)
+
+                  return (
+                    <motion.span
+                      layoutId={item.id} // Critical: allows animation across different parents
+                      key={item.id} // Key must track the identity of the letter, not the index
+                      className="inline-block cursor-default relative"
+                      custom={uniqueIndex} // Pass index to variants
+                      initial="initial"
+                      animate={animateState}
+                      variants={variants}
+                      whileHover={letterAnimation.whileHover}
+                      transition={{ 
+                         layout: { duration: 0.8, type: "spring", bounce: 0.2 } // Smooths the swap
+                      }}
+                    >
+                      {item.char}
+                    </motion.span>
+                  );
+                })}
               </span>
             ))}
           </motion.h1>
@@ -94,7 +167,7 @@ const Hero = () => {
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-primary-text border border-glass-border hover:bg-surface-subtle transition-colors text-base"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-primary-text glass-card hover:border-accent/40 shadow-none hover:shadow-lg hover:scale-105 active:scale-95 transition-all text-base"
             >
               Get in touch
             </a>

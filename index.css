@@ -2,18 +2,40 @@
 
 @layer base {
   :root {
-    /* Warm cream theme */
+    /* Warm cream theme (Light) */
     --bg-primary: #f8f6f2;
     --bg-elevated: #fffefb;
     --text-primary: #021e62;
     --text-secondary: rgba(2, 30, 98, 0.7);
     --text-tertiary: rgba(2, 30, 98, 0.5);
-    --glass-bg: rgba(255, 253, 248, 0.9);
-    --glass-border: rgba(2, 30, 98, 0.1);
-    --glass-shadow: rgba(2, 30, 98, 0.06);
-    --surface-subtle: rgba(2, 30, 98, 0.05);
+    --glass-bg: rgba(255, 255, 255, 0.4);
+    --glass-border: rgba(2, 30, 98, 0.08);
+    --glass-shadow: rgba(2, 30, 98, 0.05);
+    --surface-subtle: rgba(2, 30, 98, 0.04);
     --accent: #c45c26;
-    --accent-dim: rgba(196, 92, 38, 0.15);
+    --accent-dim: rgba(196, 92, 38, 0.12);
+  }
+
+  [data-theme='dark'] {
+    --bg-primary: #0a0a0d;
+    --bg-elevated: #16161a;
+    --text-primary: #e4e4e7;
+    --text-secondary: rgba(228, 228, 231, 0.7);
+    --text-tertiary: rgba(228, 228, 231, 0.5);
+    --glass-bg: rgba(22, 22, 26, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: rgba(0, 0, 0, 0.4);
+    --surface-subtle: rgba(255, 255, 255, 0.05);
+    --accent: #f97316;
+    --accent-dim: rgba(249, 115, 22, 0.15);
+  }
+
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 var(--glass-shadow);
   }
 
   html {
@@ -55,12 +77,13 @@
     background: var(--text-primary);
     color: var(--bg-primary);
     font-weight: 600;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   .btn-cta:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
+    opacity: 0.95;
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 10px 20px -10px var(--text-primary);
   }
 
   /* 3D Transform Utilities */

@@ -39,9 +39,9 @@ function App() {
       <Background />
       <Navbar isScrolled={isScrolled} />
       
-      {/* Fixed Resume Button */}
-      <div className="fixed top-6 right-6 z-[60] hidden md:block">
-        <ResumeButton />
+      {/* Fixed Resume FAB */}
+      <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[60]">
+        <ResumeButton isCompact={isScrolled} />
       </div>
 
       <main className="relative w-full overflow-x-hidden">

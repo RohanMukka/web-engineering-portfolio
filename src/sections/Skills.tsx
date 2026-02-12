@@ -1,77 +1,229 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Code, Database, Globe, Server, Terminal, Cpu, Layers } from 'lucide-react';
 
 const skillsData = [
   {
     category: "Languages",
-    items: ["Python", "Java", "C/C++", "JavaScript", "SQL", "Kotlin", "HTML/CSS", "Jquery", "Typescript", "MATLAB"]
+    icon: <Code className="w-8 h-8 text-electric-cyan" />,
+    items: [
+      { name: "Python", icon: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" },
+      { name: "Java", icon: "https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg" },
+      { name: "C/C++", icon: "https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg" },
+      { name: "JavaScript", icon: "https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" },
+      { name: "SQL", icon: "https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png" }, // Adjusted as SQL generic or specific DB
+      { name: "Kotlin", icon: "https://upload.wikimedia.org/wikipedia/commons/7/74/Kotlin_Icon.png" },
+      { name: "HTML/CSS", icon: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" },
+      { name: "TypeScript", icon: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" },
+      { name: "MATLAB", icon: "https://upload.wikimedia.org/wikipedia/commons/2/21/Matlab_Logo.png" }
+    ]
   },
   {
     category: "Developer Tools",
-    items: ["GitHub", "Gitlab", "Kubernetes", "Docker", "AWS", "Pycharm", "Eclipse", "Jenkins"]
+    icon: <Terminal className="w-8 h-8 text-primary-purple" />,
+    items: [
+      { name: "GitHub", icon: "https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" },
+      { name: "GitLab", icon: "https://upload.wikimedia.org/wikipedia/commons/e/e1/GitLab_logo.svg" },
+      { name: "Kubernetes", icon: "https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg" },
+      { name: "Docker", icon: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg" },
+      { name: "AWS", icon: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" },
+      { name: "PyCharm", icon: "https://upload.wikimedia.org/wikipedia/commons/1/1d/PyCharm_Icon.svg" },
+      { name: "Jenkins", icon: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Jenkins_logo.svg" }
+    ]
   },
   {
     category: "Frameworks/Tools",
-    items: ["React.js", "Node.js", "Firebase", "Bootstrap5", "Google Cloud", "TensorFlow", "Scikit-learn", "Angular", "Django", "Next.js"]
+    icon: <Globe className="w-8 h-8 text-primary-pink" />,
+    items: [
+      { name: "React.js", icon: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" },
+      { name: "Node.js", icon: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" },
+      { name: "Firebase", icon: "https://upload.wikimedia.org/wikipedia/commons/3/37/Firebase_Logo.svg" },
+      { name: "Google Cloud", icon: "https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" },
+      { name: "TensorFlow", icon: "https://upload.wikimedia.org/wikipedia/commons/2/2d/Tensorflow_logo.svg" },
+      { name: "Scikit-learn", icon: "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" },
+      { name: "Angular", icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/angularjs/angularjs-original.svg" },
+      { name: "Next.js", icon: "https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png" }
+    ]
   },
   {
     category: "Platforms",
-    items: ["Linux/Unix", "Windows", "Git", "Microsoft Office Suite"]
+    icon: <Server className="w-8 h-8 text-primary-orange" />,
+    items: [
+      { name: "Linux", icon: "https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" },
+      { name: "Windows", icon: "https://upload.wikimedia.org/wikipedia/commons/8/87/Windows_logo_-_2021.svg" },
+      { name: "Git", icon: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Git-logo.svg" }
+    ]
   },
   {
     category: "Concepts",
-    items: ["RESTful APIs", "Fullstack Web Development", "Machine learning", "MVC", "Software Development", "Web Application Development", "Mobile Application Development", "Distributed Systems", "Parallel Systems", "Natural Language Processing", "Security"]
+    icon: <Layers className="w-8 h-8 text-primary-green" />,
+    items: [
+      { name: "RESTful APIs", icon: "https://cdn-icons-png.flaticon.com/512/8297/8297437.png" }, // Generic API icon
+      { name: "Fullstack", icon: "https://cdn-icons-png.flaticon.com/512/10061/10061837.png" }, // Layers
+      { name: "Machine Learning", icon: "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" }, 
+      { name: "NLP", icon: "https://cdn-icons-png.flaticon.com/512/12222/12222588.png" },
+      { name: "Security", icon: "https://cdn-icons-png.flaticon.com/512/2716/2716652.png" } // Better security shield icon
+    ]
   },
-  {
+    {
     category: "Specialized Tech",
-    items: ["Accessible Technologies", "Machine Learning Infrastructure", "Speech Audio", "Generative AI", "Reinforcement Learning"]
+    icon: <Cpu className="w-8 h-8 text-primary-blue" />,
+    items: [
+      { name: "AI Infra", icon: "https://cdn-icons-png.flaticon.com/512/2103/2103633.png" },
+      { name: "Speech Audio", icon: "https://cdn-icons-png.flaticon.com/512/2883/2883162.png" },
+      { name: "Gen AI", icon: "https://cdn-icons-png.flaticon.com/512/12128/12128882.png" }
+    ]
   }
 ];
 
 const Skills = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % skillsData.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + skillsData.length) % skillsData.length);
+  };
+
   return (
-    <section id="skills" className="py-24 px-6 bg-surface-subtle/30">
-      <div className="max-w-6xl mx-auto">
+    <section id="skills" className="py-32 px-6 relative overflow-hidden min-h-[800px] flex items-center justify-center">
+      <div className="max-w-7xl mx-auto w-full relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-text mb-6">
-            Technical Skills
-          </h2>
-          <p className="text-primary-secondary max-w-2xl text-lg">
-             A comprehensive toolkit developed through academic rigor and hands-on project experience.
-          </p>
+            <h2 className="text-4xl md:text-6xl font-display font-bold text-primary-text mb-6">
+            Technical Arsenal
+            </h2>
+            <p className="text-primary-secondary text-xl max-w-2xl mx-auto">
+                A curated selection of technologies I've mastered.
+            </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillsData.map((skillGroup, idx) => (
-            <motion.div
-              key={skillGroup.category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="p-6 rounded-2xl bg-white/50 border border-glass-border hover:border-accent/30 transition-colors"
+        {/* Carousel Container */}
+        <div className="relative h-[500px] flex items-center justify-center perspective-1000">
+            
+            {/* Left Button */}
+            <button 
+                onClick={prevSlide}
+                className="absolute left-4 md:left-0 z-30 p-4 rounded-full bg-glass-bg border border-glass-border text-primary-text hover:bg-glass-shadow transition-all backdrop-blur-md hover:scale-110 active:scale-95"
+                aria-label="Previous Skill"
             >
-              <h3 className="text-xl font-display font-semibold text-primary-text mb-4">
-                {skillGroup.category}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {skillGroup.items.map((item) => (
-                  <span
-                    key={item}
-                    className="px-3 py-1.5 text-sm rounded-md bg-white border border-primary-secondary/10 text-primary-secondary hover:text-primary-text hover:border-accent/30 transition-colors"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                <ChevronLeft size={32} />
+            </button>
+
+            {/* Right Button */}
+            <button 
+                onClick={nextSlide}
+                className="absolute right-4 md:right-0 z-30 p-4 rounded-full bg-glass-bg border border-glass-border text-primary-text hover:bg-glass-shadow transition-all backdrop-blur-md hover:scale-110 active:scale-95"
+                aria-label="Next Skill"
+            >
+                <ChevronRight size={32} />
+            </button>
+
+
+            {/* Cards */}
+            <div className="relative w-full h-full flex items-center justify-center">
+                <AnimatePresence mode='popLayout'>
+                    {skillsData.map((skill, index) => {
+                        // Calculate relative position based on currentIndex
+                        // We want 3 cards visible: prev, current, next
+                        // But since we need a loop, it's tricky with map. 
+                        // Instead, let's render based on index logic relative to current.
+                        
+                        let offset = index - currentIndex;
+                        // Handle wrap-around logic for visual positioning
+                        if (offset < -Math.floor(skillsData.length / 2)) offset += skillsData.length;
+                        if (offset > Math.floor(skillsData.length / 2)) offset -= skillsData.length;
+
+                        // Only render if within range -1, 0, 1 for performance and visual clarity
+                        if (Math.abs(offset) > 1) return null;
+
+                        const isCenter = offset === 0;
+                        
+                        return (
+                            <motion.div
+                                key={skill.category}
+                                layout
+                                initial={{ 
+                                    scale: 0.8, 
+                                    opacity: 0, 
+                                    x: offset * 300, // Initial position guess
+                                    filter: 'blur(10px)'
+                                }}
+                                animate={{ 
+                                    scale: isCenter ? 1 : 0.85, 
+                                    opacity: isCenter ? 1 : 0.4, 
+                                    x: offset * (window.innerWidth < 768 ? 0 : 400), // Stack on mobile, spread on desktop
+                                    y: window.innerWidth < 768 && !isCenter ? (offset > 0 ? 300 : -300) : 0, // Mobile vertical stack or hide
+                                    zIndex: isCenter ? 10 : 5,
+                                    filter: isCenter ? 'blur(0px)' : 'blur(4px)',
+                                    rotateY: offset * 15 // 3D rotation effect
+                                }}
+                                exit={{ opacity: 0, scale: 0.5, filter: 'blur(10px)' }}
+                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                className={`absolute w-[300px] md:w-[380px] h-[450px] rounded-3xl p-8 glass-card border overflow-hidden ${isCenter ? 'border-primary-text/20 shadow-2xl shadow-primary-text/10' : 'border-glass-border font-medium opacity-80'} flex flex-col items-center justify-start gap-8`}
+                                style={{
+                                    transformStyle: 'preserve-3d',
+                                }}
+                            >
+                                {isCenter && (
+                                    <motion.div 
+                                        className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full"
+                                        animate={{ x: ['100%', '-100%'] }}
+                                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                                    />
+                                )}
+                                <div className="p-4 rounded-full bg-surface-subtle/50 border border-white/5 shadow-inner">
+                                    {skill.icon}
+                                </div>
+                                <h3 className={`text-2xl font-display font-bold ${isCenter ? 'text-primary-text' : 'text-primary-secondary'}`}>
+                                    {skill.category}
+                                </h3>
+                                
+                                <div className="grid grid-cols-3 gap-4 w-full">
+                                    {skill.items.map((item) => (
+                                        <div key={item.name} className="group relative flex flex-col items-center justify-center gap-2 p-2 rounded-xl hover:bg-white/5 transition-colors cursor-help">
+                                            <div className="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                                <img 
+                                                    src={item.icon} 
+                                                    alt={item.name} 
+                                                    className="w-full h-full object-contain filter drop-shadow-md"
+                                                    loading="lazy"
+                                                />
+                                            </div>
+                                            
+                                            {/* Tooltip */}
+                                            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity px-2 py-1 rounded bg-black/80 text-white text-xs whitespace-nowrap pointer-events-none z-20 shadow-lg">
+                                                {item.name}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        );
+                    })}
+                </AnimatePresence>
+            </div>
+
         </div>
+        
+        {/* Pagination Dots */}
+        <div className="flex justify-center gap-3 mt-12">
+            {skillsData.map((_, idx) => (
+                <button
+                    key={idx}
+                    onClick={() => setCurrentIndex(idx)}
+                    className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-primary-text' : 'w-2 bg-primary-secondary/30 hover:bg-primary-secondary/60'}`}
+                    aria-label={`Go to slide ${idx + 1}`}
+                />
+            ))}
+        </div>
+
       </div>
     </section>
   );
