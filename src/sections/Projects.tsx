@@ -1,136 +1,234 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Github } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, Github, ExternalLink } from 'lucide-react';
 
 interface Project {
   title: string;
+  tagline: string;
   description: string;
   tags: string[];
-  links: {
-    github?: string;
-    demo?: string;
-  };
+  links: { github?: string; demo?: string };
+  image: string;
   color: string;
 }
 
 const projects: Project[] = [
   {
-    title: "BEneFIT",
-    description: "A decentralized fitness accountability framework using ETH staking, smart contracts, and fraud-resistant goal validation.",
-    tags: ["Ethereum", "Web3", "React", "Solidity"],
-    links: { github: "https://github.com/RohanMukka/BEneFIT" },
-    color: "#7B2CBF" 
+    title: 'BEneFIT',
+    tagline: 'Succeed or Pay the Price',
+    description: 'Decentralized fitness accountability with ETH staking and smart contracts. Users stake ETH and earn it back by completing workout goals verified by oracles.',
+    tags: ['Ethereum', 'Web3', 'React', 'Solidity'],
+    links: { github: 'https://github.com/RohanMukka/BEneFIT' },
+    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop',
+    color: '#627EEA'
   },
   {
-    title: "Spend Smart",
-    description: "Comprehensive personal finance tracker built with TypeScript and Firebase. Features real-time data synchronization.",
-    tags: ["TypeScript", "Firebase", "React", "Data Viz"],
-    links: { github: "https://github.com/RohanMukka/spendsmart" },
-    color: "#00D6FF"
+    title: 'Spend Smart',
+    tagline: 'Master Your Money',
+    description: 'Personal finance tracker with TypeScript and Firebase. Features real-time visualization of spending habits and budget categorization.',
+    tags: ['TypeScript', 'Firebase', 'React'],
+    links: { github: 'https://github.com/RohanMukka/spendsmart' },
+    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1626&auto=format&fit=crop',
+    color: '#2ecc71'
   },
   {
-    title: "Emotion Recog",
-    description: "AI system for classifying emotions from EEG signals using machine learning algorithms.",
-    tags: ["Python", "ML", "EEG", "Data Analysis"],
-    links: { github: "https://github.com/RohanMukka/Multiclass-Emotion-Recognition-from-EEG-Signals" },
-    color: "#FF0055"
+    title: 'Emotion Recog',
+    tagline: 'AI That Feels',
+    description: 'ML-based emotion classification from EEG signals using deep learning techniques to interpret brainwave patterns.',
+    tags: ['Python', 'ML', 'EEG'],
+    links: { github: 'https://github.com/RohanMukka/Multiclass-Emotion-Recognition-from-EEG-Signals' },
+    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1530&auto=format&fit=crop',
+    color: '#9b59b6'
   },
   {
-    title: "Patient Network",
-    description: "Robust database system for patient management handling complex queries and data relationships.",
-    tags: ["Java", "SQL", "Database Design"],
-    links: { github: "https://github.com/RohanMukka/Patient-Assistant-Network-Database-System" },
-    color: "#00FF99"
+    title: 'Patient Network',
+    tagline: 'Healthcare Streamlined',
+    description: 'Database system for patient management and complex queries. Optimized for hospital workflows and data integrity.',
+    tags: ['Java', 'SQL'],
+    links: { github: 'https://github.com/RohanMukka/Patient-Assistant-Network-Database-System' },
+    image: 'https://images.unsplash.com/photo-1538108149393-fbbd81895907?q=80&w=1528&auto=format&fit=crop',
+    color: '#e74c3c'
   },
   {
-    title: "Poly Detect",
-    description: "NLP model for detecting polarization in multilingual text, analyzing sentiment and bias.",
-    tags: ["NLP", "Python", "Deep Learning"],
-    links: { github: "https://github.com/RohanMukka/Multilingual-Polarization-Detection" },
-    color: "#FF9900"
+    title: 'Poly Detect',
+    tagline: 'Uncovering Bias',
+    description: 'NLP model for polarization detection in multilingual text. Analyzes sentiment and bias across different languages.',
+    tags: ['NLP', 'Python'],
+    links: { github: 'https://github.com/RohanMukka/Multilingual-Polarization-Detection' },
+    image: 'https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=1470&auto=format&fit=crop',
+    color: '#e67e22'
   },
   {
-    title: "FitPrep",
-    description: "Fitness preparation and tracking tool for planning workouts and nutrition goals.",
-    tags: ["Web Dev", "Health Tech"],
-    links: { github: "https://github.com/RohanMukka/fitprep" },
-    color: "#2A48D1"
-  }
+    title: 'FitPrep',
+    tagline: 'Plan. Eat. Lift.',
+    description: 'Fitness planning and tracking for workouts and nutrition. Generates personalized meal and workout plans.',
+    tags: ['Web', 'Health'],
+    links: { github: 'https://github.com/RohanMukka/fitprep' },
+    image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=1453&auto=format&fit=crop',
+    color: '#1abc9c'
+  },
 ];
 
-const Projects = () => {
-  return (
-    <section id="projects" className="relative min-h-screen py-32 px-6">
-       <div className="max-w-7xl mx-auto">
-            <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="mb-20"
-            >
-                <div className="inline-block px-3 py-1 rounded-full border border-primary-blue/30 bg-primary-blue/10 text-electric-cyan text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
-                  Selected Work
-                </div>
-                <h2 className="text-5xl md:text-7xl font-bold text-primary-text mb-6 tracking-tight font-display">
-                  Featured <br /> Projects.
-                </h2>
-                <p className="text-secondary-text text-xl max-w-2xl">
-                   A collection of experiments, products, and systems engineering.
-                </p>
-            </motion.div>
+const ProjectCard = ({ project }: { project: Project }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                {projects.map((project, idx) => (
-                    <motion.div
-                        key={idx}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: idx * 0.1 }}
-                        className={`
-                           ${idx === 0 || idx === 3 ? 'md:col-span-2' : 'md:col-span-1'}
-                        `}
-                    >
-                         <a
-                            href={project.links.github ?? project.links.demo ?? '#'}
-                            target={project.links.github || project.links.demo ? "_blank" : undefined}
-                            rel={(project.links.github || project.links.demo) ? "noopener noreferrer" : undefined}
-                            className="group relative block h-[500px] w-full cursor-pointer overflow-hidden rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-md transition-all duration-500 hover:scale-[1.01] hover:bg-white/[0.07] focus:outline-none focus-visible:ring-2 focus-visible:ring-electric-cyan/50"
-                        >
-                            <div 
-                                className="absolute top-[-20%] right-[-20%] w-[120%] h-[120%] rounded-full opacity-20 blur-[100px] transition-opacity duration-500 group-hover:opacity-40"
-                                style={{ background: `radial-gradient(circle, ${project.color}, transparent)` }}
-                            />
-                            <div className="relative h-full flex flex-col justify-between p-10">
-                                <div>
-                                    <div className="flex justify-between items-start mb-6">
-                                        <div className="p-3 rounded-full bg-white/10 backdrop-blur-md" aria-hidden>
-                                            <Github size={20} />
-                                        </div>
-                                        <span className="flex items-center gap-2 text-sm text-white/40 group-hover:text-white transition-colors uppercase tracking-wider font-medium">
-                                            View Code <ArrowRight size={14} />
-                                        </span>
-                                    </div>
-                                    <h3 className="text-4xl font-bold text-white mb-4 font-display leading-[0.9]">
-                                        {project.title}
-                                    </h3>
-                                    <p className="text-lg text-white/60 line-clamp-3 leading-relaxed">
-                                        {project.description}
-                                    </p>
-                                </div>
-                                <div className="flex flex-wrap gap-2 mt-8">
-                                    {project.tags.map(tag => (
-                                        <span key={tag} className="text-xs font-bold px-3 py-1.5 rounded-full bg-black/20 text-white/60 border border-white/5">
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                         </a>
-                    </motion.div>
-                ))}
+  return (
+    <div 
+      className="relative h-[400px] w-full cursor-pointer group perspective-1000"
+      onMouseEnter={() => setIsFlipped(true)}
+      onMouseLeave={() => setIsFlipped(false)}
+    >
+      <motion.div
+        className="w-full h-full relative preserve-3d transition-all duration-500"
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+      >
+        {/* Front Face */}
+        <div className="absolute inset-0 w-full h-full backface-hidden rounded-2xl overflow-hidden shadow-lg border border-glass-border bg-white">
+          <img 
+            src={project.image} 
+            alt={project.title} 
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-8">
+            <h3 className="text-3xl font-display font-bold text-white mb-1">{project.title}</h3>
+            <p className="text-white/80 text-sm font-medium tracking-wide uppercase mb-3">{project.tagline}</p>
+            <div className="h-1 w-12 rounded-full" style={{ backgroundColor: project.color }}></div>
+          </div>
+        </div>
+
+        {/* Back Face */}
+        <div 
+          className="absolute inset-0 w-full h-full backface-hidden rounded-2xl overflow-hidden shadow-lg border border-glass-border bg-white p-8 flex flex-col rotate-y-180"
+          style={{ transform: 'rotateY(180deg)' }}
+        >
+          <div className="flex justify-between items-start mb-6">
+            <h3 className="text-2xl font-display font-bold text-primary-text" style={{ color: project.color }}>
+              {project.title}
+            </h3>
+            <div className="flex gap-3">
+              {project.links.github && (
+                <a 
+                  href={project.links.github} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-full hover:bg-surface-subtle transition-colors text-primary-text"
+                  title="View GitHub"
+                >
+                  <Github size={20} />
+                </a>
+              )}
+              {project.links.demo && (
+                <a 
+                  href={project.links.demo} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-full hover:bg-surface-subtle transition-colors text-primary-text"
+                  title="View Source"
+                >
+                  <ExternalLink size={20} />
+                </a>
+              )}
             </div>
-       </div>
+          </div>
+          
+          <p className="text-primary-secondary mb-8 leading-relaxed flex-grow">
+            {project.description}
+          </p>
+
+          <div className="flex flex-wrap gap-2">
+            {project.tags.map(tag => (
+              <span 
+                key={tag} 
+                className="px-3 py-1 text-xs font-semibold rounded-full bg-surface-subtle text-primary-text border border-primary-secondary/10"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+const Projects = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      // Get the width of the first card, default to 400 if not found
+      const cardWidth = container.firstElementChild?.clientWidth || 400;
+      const gap = 24; // gap-6 corresponds to 1.5rem or 24px
+      const scrollAmount = cardWidth + gap;
+      
+      const currentScroll = container.scrollLeft;
+      const targetScroll = direction === 'left' ? currentScroll - scrollAmount : currentScroll + scrollAmount;
+      
+      container.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  return (
+    <section id="projects" className="py-24 md:py-32 px-6">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          className="mb-12 flex justify-between items-end"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-text mb-4">
+              Projects
+            </h2>
+            <p className="text-primary-secondary max-w-xl">
+              A selection of things I’ve built — from full-stack apps to ML and systems work.
+            </p>
+          </div>
+          
+          <div className="hidden md:flex gap-4">
+            <button 
+              onClick={() => scroll('left')}
+              className="p-3 rounded-full border border-primary-secondary/20 hover:bg-surface-subtle hover:border-accent transition-all text-primary-text"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button 
+              onClick={() => scroll('right')}
+              className="p-3 rounded-full border border-primary-secondary/20 hover:bg-surface-subtle hover:border-accent transition-all text-primary-text"
+              aria-label="Scroll right"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+        </motion.div>
+
+        <div className="relative w-full">
+          <div 
+            ref={scrollContainerRef}
+            className="flex overflow-x-auto gap-6 pb-8 px-6 -mx-6 snap-x snap-mandatory scrollbar-none scroll-smooth"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {projects.map((project, idx) => (
+              <motion.div
+                key={project.title}
+                className="min-w-[85vw] md:min-w-[400px] snap-center flex-shrink-0"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+              >
+                <ProjectCard project={project} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

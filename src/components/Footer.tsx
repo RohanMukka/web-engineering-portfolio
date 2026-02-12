@@ -1,32 +1,22 @@
-import React from 'react';
-import SectionContainer from './SectionContainer';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="w-full py-12 border-t border-white/5 bg-[#050505]">
-      <SectionContainer className="!py-0">
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm text-white/40">
-          <div className="mb-4 md:mb-0">
-             <p>
-                © {currentYear} Rohan Mukka. All rights reserved.
-             </p>
-          </div>
-          
-          <div className="flex items-center space-x-6">
-            <a href="https://github.com/rohanmukka" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/rohanmukka" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                LinkedIn
-            </a>
-             <a href="mailto:contact@rohanmukka.com" className="hover:text-white transition-colors">
-                Email
-            </a>
-          </div>
+    <footer className="py-8 border-t border-glass-border">
+      <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-primary-tertiary">
+        <span>© {new Date().getFullYear()} Rohan Mukka</span>
+        <div className="flex gap-6">
+          <a href="https://github.com/rohanmukka" target="_blank" rel="noopener noreferrer" className="hover:text-primary-text transition-colors" aria-label="GitHub">
+            <Github size={20} />
+          </a>
+          <a href="https://www.linkedin.com/in/rohanmukka" target="_blank" rel="noopener noreferrer" className="hover:text-primary-text transition-colors" aria-label="LinkedIn">
+            <Linkedin size={20} />
+          </a>
+          <a href="mailto:rohanmukka@gmail.com" className="hover:text-primary-text transition-colors" aria-label="Email">
+            <Mail size={20} />
+          </a>
         </div>
-      </SectionContainer>
+      </div>
     </footer>
   );
 };

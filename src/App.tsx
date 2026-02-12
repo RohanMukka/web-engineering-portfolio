@@ -2,39 +2,52 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Hero from './sections/Hero';
-import Foundations from './sections/Foundations';
-import Interactive from './sections/Interactive';
 import Architecture from './sections/Architecture';
 import Projects from './sections/Projects';
-import Performance from './sections/Performance';
+import Skills from './sections/Skills';
+import Education from './sections/Education';
 import FinalCTA from './sections/FinalCTA';
-
-import WeatherSystem from './components/WeatherSystem';
+import Loader from './components/Loader';
+import ResumeButton from './components/ResumeButton';
 
 function App() {
+  const [loading, setLoading] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    // Simulate initial loading
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2500);
 
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
-    <div className="bg-background text-primary-text selection:bg-cosmic-purple/30 selection:text-white transition-colors duration-1000">
-      <WeatherSystem />
+    <div className="bg-background text-primary-text">
       <Navbar isScrolled={isScrolled} />
       
+      {/* Fixed Resume Button */}
+      <div className="fixed top-6 right-6 z-[60] hidden md:block">
+        <ResumeButton />
+      </div>
+
       <main className="relative w-full overflow-x-hidden">
         <Hero />
-        <Foundations />
-        <Interactive />
         <Architecture />
         <Projects />
-        <Performance />
+        <Skills />
+        <Education />
         <FinalCTA />
         <Footer />
       </main>
