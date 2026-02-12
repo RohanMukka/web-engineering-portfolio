@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
+import FloatingParticles from '../components/FloatingParticles';
 
 const Hero = () => {
   const [words, setWords] = useState([
@@ -68,26 +69,57 @@ const Hero = () => {
 
   return (
     <section id="hero" className="relative flex items-center justify-center min-h-screen px-6 overflow-hidden py-24 md:py-0">
+      <FloatingParticles count={30} />
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-center">
         
         {/* Left Column: Image */}
         <motion.div 
-          className="relative order-2 md:order-1 flex justify-center md:justify-end"
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative order-2 md:order-1 flex justify-center md:justify-end group"
+          initial={{ opacity: 0, y: 50, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }} // Fast start, slow end
         >
           <div className="relative w-[300px] h-[400px] md:w-[400px] md:h-[500px]">
-             {/* Main Image */}
-             <img 
-               src="/hero-profile.png" 
-               alt="Rohan Mukka"
-               className="w-full h-full object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl" 
-             />
+             {/* Main Image with Premium Hover */}
+             <motion.div
+               className="w-full h-full relative z-10 rounded-2xl overflow-hidden shadow-2xl"
+               whileHover={{ 
+                 scale: 1.02,
+                 boxShadow: "0 25px 50px -12px rgba(var(--accent-rgb), 0.25)"
+               }}
+               transition={{ duration: 0.4 }}
+             >
+               <img 
+                 src="/hero-profile.png" 
+                 alt="Rohan Mukka"
+                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105" 
+               />
+               
+               {/* Subtle Overlay Glow */}
+               <div className="absolute inset-0 bg-gradient-to-tr from-accent/0 via-accent/5 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+             </motion.div>
              
-             {/* Decorative Elements */}
-             <div className="absolute -z-10 top-6 -left-6 w-full h-full border-2 border-primary-text/20 rounded-2xl"></div>
-             <div className="absolute -z-20 top-12 -left-12 w-full h-full bg-surface-subtle rounded-2xl"></div>
+             {/* Decorative Elements with Animations */}
+             <motion.div 
+               className="absolute -z-10 top-6 -left-6 w-full h-full border-2 border-primary-text/20 rounded-2xl"
+               animate={{ 
+                 x: [0, 5, 0],
+                 y: [0, -5, 0]
+               }}
+               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+             ></motion.div>
+             <motion.div 
+               className="absolute -z-20 top-12 -left-12 w-full h-full bg-surface-subtle rounded-2xl"
+               animate={{ 
+                 x: [0, -5, 0],
+                 y: [0, 5, 0]
+               }}
+               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+             ></motion.div>
+
+             {/* Floating Accent Blobs */}
+             <div className="absolute -top-10 -right-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl animate-pulse"></div>
+             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary-blue/10 rounded-full blur-3xl animate-pulse delay-700"></div>
           </div>
         </motion.div>
 

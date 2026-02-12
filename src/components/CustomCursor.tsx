@@ -1,64 +1,81 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, useSpring } from 'framer-motion';
 
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
+
+  // Smooth movement for the outer ring
+  const ringX = useSpring(0, { stiffness: 150, damping: 20 });
+  const ringY = useSpring(0, { stiffness: 150, damping: 20 });
 
   useEffect(() => {
     const mouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY
-      });
+      setMousePosition({ x: e.clientX, y: e.clientY });
+      ringX.set(e.clientX);
+      ringY.set(e.clientY);
     };
 
-    const handleMouseOver = (e: MouseEvent) => {
-        const target = e.target as HTMLElement;
-        if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button')) {
-            setIsHovering(true);
-        } else {
-            setIsHovering(false);
-        }
+    const handleHover = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        target.tagName === 'A' || 
+        target.tagName === 'BUTTON' || 
+        target.closest('a') || 
+        target.closest('button') ||
+        target.classList.contains('cursor-pointer')
+      ) {
+        setIsHovering(true);
+      } else {
+        setIsHovering(false);
+      }
     };
 
-    window.addEventListener("mousemove", mouseMove);
-    window.addEventListener("mouseover", handleMouseOver);
+    const mouseDown = () => setIsClicking(true);
+    const mouseUp = () => setIsClicking(false);
+
+    window.addEventListener('mousemove', mouseMove);
+    window.addEventListener('mouseover', handleHover);
+    window.addEventListener('mousedown', mouseDown);
+    window.addEventListener('mouseup', mouseUp);
 
     return () => {
-      window.removeEventListener("mousemove", mouseMove);
-      window.removeEventListener("mouseover", handleMouseOver);
+      window.removeEventListener('mousemove', mouseMove);
+      window.removeEventListener('mouseover', handleHover);
+      window.removeEventListener('mousedown', mouseDown);
+      window.removeEventListener('mouseup', mouseUp);
     };
-  }, []);
+  }, [ringX, ringY]);
 
   return (
     <>
-        <motion.div
-            className="fixed top-0 left-0 w-4 h-4 bg-electric-cyan rounded-full pointer-events-none z-[100] mix-blend-difference"
-            animate={{
-                x: mousePosition.x - 8,
-                y: mousePosition.y - 8,
-                scale: isHovering ? 2.5 : 1,
-            }}
-            transition={{
-                type: "tween",
-                ease: "backOut",
-                duration: 0.1
-            }}
-        />
-        <motion.div
-            className="fixed top-0 left-0 w-8 h-8 border border-white rounded-full pointer-events-none z-[100] mix-blend-difference"
-            animate={{
-                x: mousePosition.x - 16,
-                y: mousePosition.y - 16,
-                scale: isHovering ? 1.5 : 1,
-            }}
-            transition={{
-                type: "tween",
-                ease: "backOut",
-                duration: 0.15 
-            }}
-        />
+      {/* Small Dot - Stuck to mouse */}
+      <motion.div
+        className="fixed top-0 left-0 w-1.5 h-1.5 bg-accent rounded-full pointer-events-none z-[10000] hidden md:block"
+        animate={{
+          x: mousePosition.x - 3,
+          y: mousePosition.y - 3,
+          scale: isHovering ? 0 : 1
+        }}
+        transition={{ type: "tween", duration: 0 }}
+      />
+
+      {/* Outer Ring - Lagged movement */}
+      <motion.div
+        className="fixed top-0 left-0 w-8 h-8 border border-accent rounded-full pointer-events-none z-[9999] hidden md:block"
+        style={{
+          x: ringX,
+          y: ringY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        animate={{
+          scale: isHovering ? 2 : isClicking ? 0.8 : 1,
+          backgroundColor: isHovering ? "rgba(var(--accent-rgb), 0.1)" : "rgba(var(--accent-rgb), 0)",
+          borderWidth: isHovering ? "0px" : "1px"
+        }}
+      />
     </>
   );
 };

@@ -9,6 +9,8 @@ import Education from './sections/Education';
 import FinalCTA from './sections/FinalCTA';
 import Loader from './components/Loader';
 import ResumeButton from './components/ResumeButton';
+import BackToTop from './components/BackToTop';
+import CustomCursor from './components/CustomCursor';
 import Background from './components/Background';
 
 function App() {
@@ -35,12 +37,14 @@ function App() {
   }
 
   return (
-    <div className="bg-background text-primary-text relative min-h-screen">
+    <div className="bg-background text-primary-text relative min-h-screen cursor-none">
+      <CustomCursor />
       <Background />
       <Navbar isScrolled={isScrolled} />
       
-      {/* Fixed Resume FAB */}
-      <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[60]">
+      {/* Fixed UI Elements */}
+      <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[60] flex flex-col gap-4 items-center">
+        <BackToTop />
         <ResumeButton isCompact={isScrolled} />
       </div>
 

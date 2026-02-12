@@ -11,7 +11,8 @@ const educationData = [
     minor: "Minor in AI/ML",
     gpa: "9.1/10.0",
     period: "Aug 2020 – May 2024",
-    color: "#FF9933"
+    color: "#FF9933",
+    coursework: ["Data Structures", "Algorithms", "Operating Systems", "Computer Networks", "DBMS", "Machine Learning"]
   },
   {
     id: 2,
@@ -20,7 +21,8 @@ const educationData = [
     degree: "Master of Science in Computer Science",
     gpa: "4.0/4.0",
     period: "Aug 2024 – May 2026",
-    color: "#830000"
+    color: "#830000",
+    coursework: ["Advanced Algorithms", "AI Infrastructure", "Deep Learning", "Software Architecture", "Quantum Computing"]
   }
 ];
 
@@ -107,28 +109,33 @@ const Education = () => {
                         </div>
                         <div className="border-t border-glass-border my-2"></div>
                         <div>
-                            <h4 className="text-lg font-semibold text-primary-text leading-tight mb-2">
+                            <h4 className="text-lg font-semibold text-primary-text leading-tight mb-3">
                                 {educationData[1].degree}
                             </h4>
-                            <div className="flex flex-wrap gap-3 mt-2">
-                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary-blue/10 text-primary-blue border border-primary-blue/20">
-                                    <Calendar size={12} />
-                                    {educationData[1].period}
-                                </span>
-                                <motion.span 
-                                    className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-bold bg-accent text-white border border-accent/20 shadow-lg shadow-accent/20"
-                                    animate={{ 
-                                        scale: [1, 1.05, 1],
-                                    }}
-                                    transition={{ 
-                                        duration: 2, 
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    }}
-                                >
-                                    <Award size={14} />
-                                    GPA: {educationData[1].gpa}
-                                </motion.span>
+                            
+                            <div className="space-y-4">
+                                <div>
+                                    <div className="text-[10px] uppercase tracking-wider text-primary-secondary font-bold mb-2">Core Coursework</div>
+                                    <div className="flex flex-wrap gap-2">
+                                        {educationData[1].coursework?.map(course => (
+                                            <span key={course} className="px-2 py-1 rounded-md bg-surface-subtle text-[11px] text-primary-secondary border border-glass-border">{course}</span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-wrap gap-3">
+                                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary-blue/10 text-primary-blue border border-primary-blue/20">
+                                        <Calendar size={12} />
+                                        {educationData[1].period}
+                                    </span>
+                                    <motion.span 
+                                        className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-bold bg-accent text-white shadow-xl shadow-accent/20"
+                                        whileHover={{ scale: 1.05 }}
+                                    >
+                                        <Award size={14} />
+                                        GPA: {educationData[1].gpa}
+                                    </motion.span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -164,21 +171,33 @@ const Education = () => {
                         </div>
                         <div className="border-t border-glass-border my-2"></div>
                         <div>
-                            <h4 className="text-lg font-semibold text-primary-text leading-tight mb-2">
+                            <h4 className="text-lg font-semibold text-primary-text leading-tight mb-1">
                                 {educationData[0].degree}
                             </h4>
-                             <p className="text-sm text-primary-secondary italic mb-2">
+                             <p className="text-sm text-accent italic mb-3">
                                 {educationData[0].minor}
                             </p>
-                            <div className="flex flex-wrap gap-3 mt-2">
-                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary-blue/10 text-primary-blue border border-primary-blue/20">
-                                    <Calendar size={12} />
-                                    {educationData[0].period}
-                                </span>
-                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-accent/10 text-accent border border-accent/20">
-                                    <Award size={12} />
-                                    GPA: {educationData[0].gpa}
-                                </span>
+                            
+                            <div className="space-y-4">
+                                <div>
+                                    <div className="text-[10px] uppercase tracking-wider text-primary-secondary font-bold mb-2">Key Modules</div>
+                                    <div className="flex flex-wrap gap-2">
+                                        {educationData[0].coursework?.map(course => (
+                                            <span key={course} className="px-2 py-1 rounded-md bg-surface-subtle text-[11px] text-primary-secondary border border-glass-border">{course}</span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-wrap gap-3">
+                                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary-blue/10 text-primary-blue border border-primary-blue/20">
+                                        <Calendar size={12} />
+                                        {educationData[0].period}
+                                    </span>
+                                    <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-bold bg-primary-orange text-white shadow-xl shadow-primary-orange/20">
+                                        <Award size={14} />
+                                        GPA: {educationData[0].gpa}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>

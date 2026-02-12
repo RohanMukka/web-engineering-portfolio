@@ -1,49 +1,77 @@
 import React from 'react';
 import SectionContainer from '../components/SectionContainer';
 import { motion } from 'framer-motion';
+import { ExternalLink, Code2, Rocket, Calendar } from 'lucide-react';
 
 const Architecture = () => {
   return (
     <SectionContainer id="architecture">
       <motion.div
-        className="max-w-4xl mx-auto p-10 md:p-14 rounded-3xl glass-card backdrop-blur-2xl"
+        className="max-w-6xl mx-auto p-8 md:p-16 rounded-[2.5rem] glass-card backdrop-blur-3xl border border-white/10 relative overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-10%" }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        animate={{ y: [0, -10, 0] }} // Gentle floating animation (this will run after whileInView if not careful, but continuous float is better handled separately)
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
-         {/* Separate floating animation to avoid conflict with entry animation */}
-         <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ 
-                duration: 6, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-            }}
-         >
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-text mb-8">
-                About Me
-            </h2>
-            
-            <div className="space-y-6 text-lg text-primary-secondary leading-relaxed text-justify">
-                <p>
-                    Back in 2020, I started my journey into the world of computer science, quickly discovering a passion for building things that solve real-world problems. What began with simple command-line tools has since evolved into developing full-stack applications and exploring the fascinating realm of machine learning.
-                </p>
+        {/* Background Glow */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-[100px] -z-10"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-blue/5 rounded-full blur-[100px] -z-10"></div>
 
-                <p>
-                    Currently pursuing my Master's in Computer Science, I am focused on building scalable and intelligent applications. I thrive on the challenge of transforming complex requirements into user-friendly solutions, whether it's developing a decentralized fitness app or an intelligent diagnostic system. My goal is to not only write clean code but also to build products that make a meaningful impact.
-                </p>
-                
-                <p>
-                    I also participate in hackathons – you can check out my projects on <a href="https://devpost.com/rohan-mukka-1" target="_blank" rel="noopener noreferrer" className="text-electric-cyan hover:underline font-medium">Devpost</a>.
-                </p>
+        <h2 className="text-4xl md:text-6xl font-display font-bold text-primary-text mb-12 tracking-tight">
+            The Architect’s <span className="text-accent italic">Journey</span>
+        </h2>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          <div className="lg:col-span-8 space-y-8">
+            <div className="space-y-6 text-xl text-primary-secondary leading-[1.8]">
+              <p>
+                  Since <span className="text-accent font-bold">2020</span>, I've been obsessed with the art of digital construction. What started as simple curiosity has grown into a deep-seated passion for architectural integrity and performance.
+              </p>
 
-                <p>
-                    When I'm not at my computer, I play chess and cricket. I believe that a balanced life fuels creativity, and I'm always looking for new experiences to inspire my next project.
-                </p>
+              <p>
+                  I don't just write code; I design systems. Currently specializing in <span className="text-primary-text font-semibold underline decoration-accent/30 decoration-4">Full-Stack Scalability</span> and <span className="text-primary-text font-semibold underline decoration-primary-blue/30 decoration-4">Intelligent Automation</span> at the University of Oklahoma, I believe that every pixel and every line of logic should serve a purpose.
+              </p>
             </div>
-         </motion.div>
+            
+            <div className="flex flex-wrap gap-5 pt-4">
+              <a 
+                href="https://devpost.com/rohan-mukka-1" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary-text text-white hover:bg-primary-text/90 transition-all duration-300 group font-bold shadow-2xl shadow-primary-text/10"
+              >
+                <Rocket size={22} className="group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
+                <span>View Hackathon Portfolio</span>
+                <ExternalLink size={18} className="opacity-50" />
+              </a>
+            </div>
+          </div>
+
+          <div className="lg:col-span-4 grid grid-cols-1 gap-5">
+            {[
+              { label: "Experience", value: "4+ Yrs", icon: <Calendar className="text-accent" />, color: "border-accent/10" },
+              { label: "Built", value: "15+ Proj", icon: <Rocket className="text-primary-blue" />, color: "border-primary-blue/10" },
+              { label: "Mastered", value: "12+ Tech", icon: <Code2 className="text-primary-purple" />, color: "border-primary-purple/10" },
+            ].map((stat, i) => (
+                  <motion.div 
+                    key={stat.label}
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 + (i * 0.1), duration: 0.5 }}
+                    className={`p-8 rounded-[2rem] bg-surface-subtle border ${stat.color} flex items-center justify-between group hover:bg-surface-subtle/80 transition-all transform hover:-translate-y-1`}
+                  >
+                <div>
+                  <div className="text-3xl font-display font-black text-primary-text mb-1">{stat.value}</div>
+                  <div className="text-xs text-primary-secondary font-bold tracking-[0.2em] uppercase opacity-60 group-hover:opacity-100 transition-opacity">{stat.label}</div>
+                </div>
+                <div className="p-4 rounded-2xl bg-white/5 group-hover:scale-110 transition-transform shadow-inner">
+                  {stat.icon}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </motion.div>
     </SectionContainer>
   );

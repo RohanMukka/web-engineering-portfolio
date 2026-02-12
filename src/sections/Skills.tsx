@@ -78,6 +78,7 @@ const skillsData = [
 
 const Skills = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isGridView, setIsGridView] = useState(false);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % skillsData.length);
@@ -99,130 +100,160 @@ const Skills = () => {
             <h2 className="text-4xl md:text-6xl font-display font-bold text-primary-text mb-6">
             Technical Arsenal
             </h2>
-            <p className="text-primary-secondary text-xl max-w-2xl mx-auto">
+            <p className="text-primary-secondary text-xl max-w-2xl mx-auto mb-10">
                 A curated selection of technologies I've mastered.
             </p>
+
+            <div className="flex justify-center mb-8">
+                <div className="flex bg-surface-subtle p-1 rounded-xl border border-glass-border">
+                    <button 
+                        onClick={() => setIsGridView(false)}
+                        className={`px-6 py-2 rounded-lg text-sm font-semibold transition-all ${!isGridView ? 'bg-primary-text text-white shadow-lg' : 'text-primary-secondary hover:text-primary-text'}`}
+                    >
+                        Carousel
+                    </button>
+                    <button 
+                        onClick={() => setIsGridView(true)}
+                        className={`px-6 py-2 rounded-lg text-sm font-semibold transition-all ${isGridView ? 'bg-primary-text text-white shadow-lg' : 'text-primary-secondary hover:text-primary-text'}`}
+                    >
+                        Grid
+                    </button>
+                </div>
+            </div>
         </motion.div>
 
-        {/* Carousel Container */}
-        <div className="relative h-[500px] flex items-center justify-center perspective-1000">
-            
-            {/* Left Button */}
-            <button 
-                onClick={prevSlide}
-                className="absolute left-4 md:left-0 z-30 p-4 rounded-full bg-glass-bg border border-glass-border text-primary-text hover:bg-glass-shadow transition-all backdrop-blur-md hover:scale-110 active:scale-95"
-                aria-label="Previous Skill"
-            >
-                <ChevronLeft size={32} />
-            </button>
-
-            {/* Right Button */}
-            <button 
-                onClick={nextSlide}
-                className="absolute right-4 md:right-0 z-30 p-4 rounded-full bg-glass-bg border border-glass-border text-primary-text hover:bg-glass-shadow transition-all backdrop-blur-md hover:scale-110 active:scale-95"
-                aria-label="Next Skill"
-            >
-                <ChevronRight size={32} />
-            </button>
-
-
-            {/* Cards */}
-            <div className="relative w-full h-full flex items-center justify-center">
-                <AnimatePresence mode='popLayout'>
-                    {skillsData.map((skill, index) => {
-                        // Calculate relative position based on currentIndex
-                        // We want 3 cards visible: prev, current, next
-                        // But since we need a loop, it's tricky with map. 
-                        // Instead, let's render based on index logic relative to current.
-                        
-                        let offset = index - currentIndex;
-                        // Handle wrap-around logic for visual positioning
-                        if (offset < -Math.floor(skillsData.length / 2)) offset += skillsData.length;
-                        if (offset > Math.floor(skillsData.length / 2)) offset -= skillsData.length;
-
-                        // Only render if within range -1, 0, 1 for performance and visual clarity
-                        if (Math.abs(offset) > 1) return null;
-
-                        const isCenter = offset === 0;
-                        
-                        return (
-                            <motion.div
-                                key={skill.category}
-                                layout
-                                initial={{ 
-                                    scale: 0.8, 
-                                    opacity: 0, 
-                                    x: offset * 300, // Initial position guess
-                                    filter: 'blur(10px)'
-                                }}
-                                animate={{ 
-                                    scale: isCenter ? 1 : 0.85, 
-                                    opacity: isCenter ? 1 : 0.4, 
-                                    x: offset * (window.innerWidth < 768 ? 0 : 400), // Stack on mobile, spread on desktop
-                                    y: window.innerWidth < 768 && !isCenter ? (offset > 0 ? 300 : -300) : 0, // Mobile vertical stack or hide
-                                    zIndex: isCenter ? 10 : 5,
-                                    filter: isCenter ? 'blur(0px)' : 'blur(4px)',
-                                    rotateY: offset * 15 // 3D rotation effect
-                                }}
-                                exit={{ opacity: 0, scale: 0.5, filter: 'blur(10px)' }}
-                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                className={`absolute w-[300px] md:w-[380px] h-[450px] rounded-3xl p-8 glass-card border overflow-hidden ${isCenter ? 'border-primary-text/20 shadow-2xl shadow-primary-text/10' : 'border-glass-border font-medium opacity-80'} flex flex-col items-center justify-start gap-8`}
-                                style={{
-                                    transformStyle: 'preserve-3d',
-                                }}
-                            >
-                                {isCenter && (
-                                    <motion.div 
-                                        className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full"
-                                        animate={{ x: ['100%', '-100%'] }}
-                                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                    />
-                                )}
-                                <div className="p-4 rounded-full bg-surface-subtle/50 border border-white/5 shadow-inner">
-                                    {skill.icon}
-                                </div>
-                                <h3 className={`text-2xl font-display font-bold ${isCenter ? 'text-primary-text' : 'text-primary-secondary'}`}>
-                                    {skill.category}
-                                </h3>
-                                
-                                <div className="grid grid-cols-3 gap-4 w-full">
-                                    {skill.items.map((item) => (
-                                        <div key={item.name} className="group relative flex flex-col items-center justify-center gap-2 p-2 rounded-xl hover:bg-white/5 transition-colors cursor-help">
-                                            <div className="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-                                                <img 
-                                                    src={item.icon} 
-                                                    alt={item.name} 
-                                                    className="w-full h-full object-contain filter drop-shadow-md"
-                                                    loading="lazy"
-                                                />
-                                            </div>
-                                            
-                                            {/* Tooltip */}
-                                            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity px-2 py-1 rounded bg-black/80 text-white text-xs whitespace-nowrap pointer-events-none z-20 shadow-lg">
-                                                {item.name}
-                                            </div>
+        {/* Content Area */}
+        <div className="relative min-h-[500px]">
+            {isGridView ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+                    {skillsData.map((skill, idx) => (
+                        <motion.div
+                            key={skill.category}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: idx * 0.1 }}
+                            className="p-8 rounded-3xl glass-card border border-glass-border flex flex-col items-center gap-6 group hover:border-primary-text/20 transition-all duration-300"
+                        >
+                            <div className="p-4 rounded-full bg-surface-subtle/50 border border-white/5 shadow-inner group-hover:scale-110 transition-transform">
+                                {skill.icon}
+                            </div>
+                            <h3 className="text-2xl font-display font-bold text-primary-text">
+                                {skill.category}
+                            </h3>
+                            <div className="grid grid-cols-3 gap-4 w-full">
+                                {skill.items.map((item) => (
+                                    <div key={item.name} className="group relative flex flex-col items-center justify-center gap-2 p-2 rounded-xl hover:bg-white/5 transition-colors cursor-help">
+                                        <div className="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                            <img src={item.icon} alt={item.name} className="w-full h-full object-contain filter drop-shadow-sm" loading="lazy" />
                                         </div>
-                                    ))}
-                                </div>
-                            </motion.div>
-                        );
-                    })}
-                </AnimatePresence>
-            </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            ) : (
+                /* Carousel View */
+                <div className="relative h-[500px] flex items-center justify-center perspective-1000">
+                    {/* Left Button */}
+                    <button 
+                        onClick={prevSlide}
+                        className="absolute left-4 md:left-0 z-30 p-4 rounded-full bg-glass-bg border border-glass-border text-primary-text hover:bg-glass-shadow transition-all backdrop-blur-md hover:scale-110 active:scale-95 shadow-xl"
+                        aria-label="Previous Skill"
+                    >
+                        <ChevronLeft size={32} />
+                    </button>
 
+                    {/* Right Button */}
+                    <button 
+                        onClick={nextSlide}
+                        className="absolute right-4 md:right-0 z-30 p-4 rounded-full bg-glass-bg border border-glass-border text-primary-text hover:bg-glass-shadow transition-all backdrop-blur-md hover:scale-110 active:scale-95 shadow-xl"
+                        aria-label="Next Skill"
+                    >
+                        <ChevronRight size={32} />
+                    </button>
+
+                    <div className="relative w-full h-full flex items-center justify-center">
+                        <AnimatePresence mode='popLayout'>
+                            {skillsData.map((skill, index) => {
+                                let offset = index - currentIndex;
+                                if (offset < -Math.floor(skillsData.length / 2)) offset += skillsData.length;
+                                if (offset > Math.floor(skillsData.length / 2)) offset -= skillsData.length;
+                                if (Math.abs(offset) > 1) return null;
+                                const isCenter = offset === 0;
+                                
+                                return (
+                                    <motion.div
+                                        key={skill.category}
+                                        layout
+                                        initial={{ 
+                                            scale: 0.8, 
+                                            opacity: 0, 
+                                            x: offset * 300,
+                                            filter: 'blur(10px)'
+                                        }}
+                                        animate={{ 
+                                            scale: isCenter ? 1 : 0.85, 
+                                            opacity: isCenter ? 1 : 0.4, 
+                                            x: offset * (window.innerWidth < 768 ? 0 : 400),
+                                            y: window.innerWidth < 768 && !isCenter ? (offset > 0 ? 300 : -300) : 0,
+                                            zIndex: isCenter ? 10 : 5,
+                                            filter: isCenter ? 'none' : 'blur(4px)', // Fixed: Changed 'blur(0px)' to 'none'
+                                            rotateY: offset * 15
+                                        }}
+                                        exit={{ opacity: 0, scale: 0.5, filter: 'blur(10px)' }}
+                                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                        className={`absolute w-[300px] md:w-[380px] h-[450px] rounded-3xl p-8 glass-card border overflow-hidden ${isCenter ? 'border-primary-text/20 shadow-2xl shadow-primary-text/10' : 'border-glass-border font-medium opacity-80'} flex flex-col items-center justify-start gap-8`}
+                                        style={{ transformStyle: 'preserve-3d' }}
+                                    >
+                                        {isCenter && (
+                                            <motion.div 
+                                                className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full"
+                                                animate={{ x: ['100%', '-100%'] }}
+                                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                                            />
+                                        )}
+                                        <div className="p-4 rounded-full bg-surface-subtle/50 border border-white/5 shadow-inner">
+                                            {skill.icon}
+                                        </div>
+                                        <h3 className={`text-2xl font-display font-bold ${isCenter ? 'text-primary-text' : 'text-primary-secondary'}`}>
+                                            {skill.category}
+                                        </h3>
+                                        <div className="grid grid-cols-3 gap-4 w-full">
+                                            {skill.items.map((item) => (
+                                                <div key={item.name} className="group relative flex flex-col items-center justify-center gap-2 p-2 rounded-xl hover:bg-white/5 transition-colors cursor-help">
+                                                    <div className="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                                        <img src={item.icon} alt={item.name} className="w-full h-full object-contain filter drop-shadow-md" loading="lazy" />
+                                                    </div>
+                                                    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity px-2 py-1 rounded bg-black/80 text-white text-xs whitespace-nowrap pointer-events-none z-20 shadow-lg">
+                                                        {item.name}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </motion.div>
+                                );
+                            })}
+                        </AnimatePresence>
+                    </div>
+                </div>
+            )}
         </div>
         
-        {/* Pagination Dots */}
-        <div className="flex justify-center gap-3 mt-12">
-            {skillsData.map((_, idx) => (
-                <button
-                    key={idx}
-                    onClick={() => setCurrentIndex(idx)}
-                    className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-primary-text' : 'w-2 bg-primary-secondary/30 hover:bg-primary-secondary/60'}`}
-                    aria-label={`Go to slide ${idx + 1}`}
-                />
-            ))}
-        </div>
+        {/* Pagination Dots - Only in Carousel Mode */}
+        {!isGridView && (
+            <div className="flex justify-center gap-3 mt-12">
+                {skillsData.map((_, idx) => (
+                    <button
+                        key={idx}
+                        onClick={() => setCurrentIndex(idx)}
+                        className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-primary-text' : 'w-2 bg-primary-secondary/40 hover:bg-primary-secondary/70'}`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                    />
+                ))}
+            </div>
+        )}
 
       </div>
     </section>

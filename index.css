@@ -6,12 +6,16 @@
     --bg-primary: #f8f6f2;
     --bg-elevated: #fffefb;
     --text-primary: #021e62;
-    --text-secondary: rgba(2, 30, 98, 0.7);
-    --text-tertiary: rgba(2, 30, 98, 0.5);
+    --text-secondary: rgba(2, 30, 98, 0.85);
+    /* Increased from 0.7 */
+    --text-tertiary: rgba(2, 30, 98, 0.65);
+    /* Increased from 0.5 */
     --glass-bg: rgba(255, 255, 255, 0.4);
-    --glass-border: rgba(2, 30, 98, 0.08);
+    --glass-border: rgba(2, 30, 98, 0.12);
+    /* Increased from 0.08 */
     --glass-shadow: rgba(2, 30, 98, 0.05);
-    --surface-subtle: rgba(2, 30, 98, 0.04);
+    --surface-subtle: rgba(2, 30, 98, 0.06);
+    /* Slightly darker for better contrast */
     --accent: #c45c26;
     --accent-dim: rgba(196, 92, 38, 0.12);
   }
