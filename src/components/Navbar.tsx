@@ -60,18 +60,6 @@ const Navbar = ({ isScrolled = false }: NavbarProps) => {
 
   return (
     <>
-      {/* Global Glassmorphism Overlay */}
-      <AnimatePresence>
-        {isNavHovered && (
-          <motion.div
-            initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-            animate={{ opacity: 1, backdropFilter: 'blur(12px)' }}
-            exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-            className="fixed inset-0 bg-white/10 dark:bg-black/10 z-40 pointer-events-none"
-            transition={{ duration: 0.4 }}
-          />
-        )}
-      </AnimatePresence>
 
       <motion.nav
         className={`fixed top-4 left-0 right-0 z-50 flex justify-center`}
