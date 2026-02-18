@@ -12,9 +12,10 @@ const ResumeButton = ({ isCompact = false }: ResumeButtonProps) => {
   const handleDownload = () => {
     if (!isChecked) {
       setIsChecked(true);
+      const baseUrl = import.meta.env.BASE_URL || '/';
       setTimeout(() => {
         const link = document.createElement('a');
-        link.href = '/Rohan_Mukka_Resume.pdf';
+        link.href = `${baseUrl}Rohan_Mukka_Resume.pdf`;
         link.download = 'Rohan_Mukka_Resume.pdf';
         document.body.appendChild(link);
         link.click();
